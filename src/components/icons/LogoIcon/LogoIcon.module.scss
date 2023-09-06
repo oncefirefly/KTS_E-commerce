@@ -1,0 +1,7 @@
+@use "/src/styles/variables" as *;
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+}
