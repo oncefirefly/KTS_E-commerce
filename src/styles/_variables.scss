@@ -1,0 +1,50 @@
+/* main colors */
+$brand: #518581;
+$brand-hover: #86aaa7;
+$brand-active: #487773;
+
+/* spaces */
+$space-xl: 48px;
+$space-l: 32px;
+$space-m: 24px;
+$space-s: 16px;
+$space-xs: 12px;
+$space-xxs: 8px;
+
+/* border */
+$border-radius: 0;
+
+/* loader */
+$loader-bg: $brand;
+
+/* button */
+$button-primary-bg: $brand;
+$button-primary-text: #fff;
+
+$button-primary-bg-hover: $brand-hover;
+$button-primary-text-hover: $button-primary-text;
+
+$button-primary-bg-disabled: #d9d9d9;
+$button-primary-text-disabled: $button-primary-text;
+
+$button-primary-bg-active: $brand-active;
+$button-primary-text-active: $button-primary-text;
+
+/* text */
+$text-primary: #000;
+$text-secondary: #afadb5;
+$text-accent: $brand;
+
+/* input */
+$input-text: $text-primary;
+$input-bg: #fff;
+$input-placeholder: $text-secondary;
+$input-border: #fff;
+
+$input-bg-focus: $input-bg;
+$input-border-focus: $brand;
+$input-text-focus: #000;
+
+$input-bg-disabled: $input-bg;
+$input-border-disabled: $input-border;
+$input-text-disabled: $text-primary;
