@@ -1,12 +1,15 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 import IconWrapper from 'components/icons/IconWrapper';
 
+import { IconProps } from 'utils/types/IconTypes';
+
 import logoStyles from './LogoIcon.module.scss';
 
-const LogoIcon: React.FC = () => {
+const LogoIcon: React.FC<IconProps> = (props) => {
   return (
-    <div className={logoStyles.logo}>
+    <Link to="/" className={`${logoStyles.logo} ${props.className || ''}`}>
       <IconWrapper width="42" height="42" viewBox="0 0 42 42" fill="none">
         <g clipPath="url(#clip0_502_630)">
           <path d="M42 0H0V42H42V0Z" fill="white" />
@@ -47,7 +50,7 @@ const LogoIcon: React.FC = () => {
           fill="#151411"
         />
       </IconWrapper>
-    </div>
+    </Link>
   );
 };
 
