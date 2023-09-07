@@ -1,0 +1,49 @@
+@use "/src/styles/variables" as *;
+
+.dropdown_container {
+  width: 300;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $space-xxs;
+}
+
+.dropdown {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+
+  outline: none;
+
+  border: none;
+  border-radius: $border-radius;
+  background: #fff;
+
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  height: fit-content;
+
+  li {
+    cursor: pointer;
+    width: 100%;
+    list-style: none;
+    color: $text-primary;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    outline: none;
+    padding: $space-s $space-xs;
+  }
+
+  li:hover {
+    color: $text-accent;
+  }
+
+  .selected {
+    color: $text-accent;
+  }
+}
