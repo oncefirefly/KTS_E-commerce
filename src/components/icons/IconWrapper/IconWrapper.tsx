@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { IconProps } from 'utils/types/IconPropsType';
+import { IconProps } from 'utils/types/IconTypes';
 
 const IconWrapper: React.FC<React.PropsWithChildren<IconProps>> = (props) => {
   return (
@@ -16,7 +16,5 @@ const IconWrapper: React.FC<React.PropsWithChildren<IconProps>> = (props) => {
     </svg>
   );
 };
-
-IconWrapper.propTypes;
 
 export default IconWrapper;
