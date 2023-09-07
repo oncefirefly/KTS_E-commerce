@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { TextProps } from 'utils/types/TextPropsTypes';
+import { TextProps } from 'utils/types/TextTypes';
 
 import textStyles from './Text.module.scss';
 
@@ -9,9 +9,9 @@ const Text: React.FC<TextProps> = ({ className, view, tag = 'p', weight, childre
 
   return (
     <CustomTag
-      className={`${className || ''}${view ? ` ${textStyles[`view-${view}`]}` : ''}${
+      className={`${textStyles.text}${view ? ` ${textStyles[`view-${view}`]}` : ''}${
         weight ? ` ${textStyles[`weight-${weight}`]}` : ''
-      }${color ? ` ${textStyles[`color-${color}`]}` : ''}`}
+      }${color ? ` ${textStyles[`color-${color}`]}` : ''}${className ? ` ${className}` : ''}`}
       style={
         maxLines
           ? {
