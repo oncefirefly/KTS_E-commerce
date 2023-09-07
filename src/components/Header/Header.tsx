@@ -14,7 +14,7 @@ import headerStyles from './Header.module.scss';
 const Header: React.FC = () => {
   return (
     <header className={headerStyles.header}>
-      <div className={`${headerStyles.header_content} content-wrapper`}>
+      <div className={`${headerStyles.header_content} content_wrapper`}>
         <LogoIcon />
         <NavBar className={headerStyles.header_nav} navBarLinks={headerRoutes} />
         <div className={headerStyles.header_profile}>
