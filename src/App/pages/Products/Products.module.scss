@@ -6,6 +6,7 @@
 }
 
 .products_title {
+  margin-bottom: 48px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,4 +17,23 @@
     max-width: 650px;
     text-align: center;
   }
+}
+
+.products_search {
+  width: 100%;
+  display: flex;
+  // flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+
+  label {
+    max-width: 1079px;
+  }
+}
+
+.products_search_controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $space-m;
 }
