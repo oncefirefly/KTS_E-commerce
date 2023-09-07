@@ -12,11 +12,13 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Header />
-      <Routes>
-        <Route path="/" element={<Products />} />
-        <Route path="/categories" element={<Categories />} />
-        <Route path="/about_us" element={<AboutUs />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/" element={<Products />} />
+          <Route path="/categories" element={<Categories />} />
+          <Route path="/about_us" element={<AboutUs />} />
+        </Routes>
+      </main>
     </BrowserRouter>
   );
 };
