@@ -13,7 +13,7 @@ import headerStyles from './Header.module.scss';
 
 const Header: React.FC = () => {
   return (
-    <div className={headerStyles.header}>
+    <header className={headerStyles.header}>
       <div className={`${headerStyles.header_content} content-wrapper`}>
         <LogoIcon />
         <NavBar className={headerStyles.header_nav} navBarLinks={headerRoutes} />
@@ -22,7 +22,7 @@ const Header: React.FC = () => {
           <UserIcon />
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 
