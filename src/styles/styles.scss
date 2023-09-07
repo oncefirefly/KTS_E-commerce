@@ -28,7 +28,12 @@ a {
   text-decoration: none;
 }
 
-.content-wrapper {
+#root {
+  min-height: 100vh;
+  background: #fafafa;
+}
+
+.content_wrapper {
   margin-inline: auto;
   max-width: 1240px;
 }
