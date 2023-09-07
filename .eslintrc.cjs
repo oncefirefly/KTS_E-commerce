@@ -46,8 +46,6 @@ module.exports = {
         ],
       },
     ],
-    'react/react-in-jsx-scope': 'off',
-    'react/jsx-uses-react': 'off',
   },
   settings: {
     'import/parsers': {

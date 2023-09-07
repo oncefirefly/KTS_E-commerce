@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import IconWrapper from 'components/icons/IconWrapper';
 
 import logoStyles from './LogoIcon.module.scss';

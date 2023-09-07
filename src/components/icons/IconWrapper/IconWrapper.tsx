@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import { IconProps } from 'utils/types/IconPropsType';
 
 const IconWrapper: React.FC<React.PropsWithChildren<IconProps>> = (props) => {
