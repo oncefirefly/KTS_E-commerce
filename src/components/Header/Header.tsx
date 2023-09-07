@@ -1,31 +1,26 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 
-import Text from 'components/Text';
+import NavBar from 'components/NavBar/NavBar';
+
+import CartIcon from 'components/icons/CartIcon';
 import LogoIcon from 'components/icons/LogoIcon';
+import UserIcon from 'components/icons/UserIcon';
+
+import { headerRoutes } from 'config/routes/routes.ts';
+
+import 'styles/styles.scss';
+import headerStyles from './Header.module.scss';
 
 const Header: React.FC = () => {
   return (
-    <div>
-      <div>
+    <div className={headerStyles.header}>
+      <div className={`${headerStyles.header_content} content-wrapper`}>
         <LogoIcon />
-        <nav>
-          <Link to="/">
-            <Text view="p-18" weight="medium">
-              Products
-            </Text>
-          </Link>
-          <Link to="/categories">
-            <Text view="p-18" weight="medium">
-              Categories
-            </Text>
-          </Link>
-          <Link to="/about_us">
-            <Text view="p-18" weight="medium">
-              About us
-            </Text>
-          </Link>
-        </nav>
+        <NavBar className={headerStyles.header_nav} navBarLinks={headerRoutes} />
+        <div className={headerStyles.header_profile}>
+          <CartIcon />
+          <UserIcon />
+        </div>
       </div>
     </div>
   );
