@@ -2,7 +2,7 @@
 
 html,
 body {
-  font-family: "Roboto" !important;
+  font-family: "Roboto", sans-serif !important;
   margin: 0;
   padding: 0;
 }
@@ -22,4 +22,13 @@ blockquote,
 figure,
 pre {
   margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.content-wrapper {
+  margin-inline: auto;
+  max-width: 1240px;
 }
