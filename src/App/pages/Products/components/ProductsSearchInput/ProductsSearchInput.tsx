@@ -4,7 +4,7 @@ import Button from 'components/Button';
 import Input from 'components/Input';
 import Text from 'components/Text';
 
-import { ProductsSearchInputProps } from 'utils/types/ProductsSearchInputTypes';
+import { ProductsSearchInputProps } from 'utils/types/ProductTypes';
 
 const ProductsSearchInput: React.FC<ProductsSearchInputProps> = (props) => {
   const [searchValue, setSearchValue] = React.useState('');
