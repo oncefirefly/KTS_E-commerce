@@ -1,6 +1,7 @@
 @use "/src/styles/variables" as *;
 
 .card_container {
+  cursor: pointer;
   max-width: 360px;
   display: inline-flex;
   padding-bottom: $space-xl;
@@ -52,6 +53,6 @@
   }
 }
 
-.hovered {
+.card_container:hover {
   box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.25);
 }

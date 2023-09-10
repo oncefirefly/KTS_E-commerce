@@ -17,18 +17,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
   actionSlot,
   ...props
 }: ProductCardProps) => {
-  const [cardIsHovered, setCardIsHovered] = React.useState(false);
-
   return (
-    <div
-      className={`${cardStyles.card_container} ${className ? ` ${className}` : ''}${
-        cardIsHovered ? ` ${cardStyles.hovered}` : ''
-      }`}
-      onClick={onClick}
-      onMouseOver={() => setCardIsHovered(true)}
-      onMouseOut={() => setCardIsHovered(false)}
-      {...props}
-    >
+    <div className={`${cardStyles.card_container} ${className ? ` ${className}` : ''}`} onClick={onClick} {...props}>
       <div className={cardStyles.card_header}>
         <img src={image} alt="card_thumbnail" />
       </div>
@@ -39,7 +29,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               {captionSlot}
             </Text>
           )}
-          <Text view="p-20" maxLines={1} weight="medium" color="primary" data-testid="text">
+          <Text view="p-20" maxLines={1} weight="bold" color="primary" data-testid="text">
             {title}
           </Text>
           <Text view="p-16" maxLines={1} color="secondary" data-testid="text">
