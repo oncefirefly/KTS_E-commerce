@@ -5,6 +5,7 @@ body {
   font-family: "Roboto", sans-serif !important;
   margin: 0;
   padding: 0;
+  background: #fafafa;
 }
 
 * {
@@ -30,7 +31,6 @@ a {
 
 #root {
   min-height: 100vh;
-  background: #fafafa;
 }
 
 .content_wrapper {
