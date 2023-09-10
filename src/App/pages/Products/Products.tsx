@@ -1,10 +1,11 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Button from 'components/Button';
 import ProductCard from 'components/ProductCard';
 
 import { getProducts } from 'config/services/products';
-import { Product } from 'utils/types/ProductTypes';
+import { OneProduct } from 'utils/types/ProductTypes';
 
 import ProductsMultiDropdown from './components/ProductsMultiDropdown';
 import ProductsSearchInput from './components/ProductsSearchInput/ProductsSearchInput';
@@ -14,17 +15,20 @@ import 'styles/styles.scss';
 import productsStyles from './Products.module.scss';
 
 const Products: React.FC = () => {
-  const [products, setProducts] = React.useState<Product[] | []>([]);
+  const navigate = useNavigate();
 
+  const [products, setProducts] = React.useState<OneProduct[] | []>([]);
+
+  // TODO: search filter
   const handleProductsSearch = (value: string) => {
-    console.log(value);
+    return value;
   };
 
   const fetchProducts = async () => {
     const fetchedProducts = await getProducts();
+    // console.log(fetchedProducts);
 
     setProducts(fetchedProducts);
-    console.log(fetchedProducts);
   };
 
   React.useEffect(() => {
@@ -48,6 +52,7 @@ const Products: React.FC = () => {
             subtitle={product.description}
             contentSlot={product.price}
             actionSlot={<Button>Add to Cart</Button>}
+            onClick={() => navigate(`/product/${product.id}`)}
           />
         ))}
       </section>
