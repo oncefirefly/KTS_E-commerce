@@ -30,7 +30,7 @@ export type ProductCardProps = {
   actionSlot?: React.ReactNode;
 };
 
-export type Product = {
+export type OneProduct = {
   id: number;
   price: number;
   title: string;
