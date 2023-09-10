@@ -1,0 +1,14 @@
+@use "/src/styles/variables" as *;
+
+.link {
+  height: inherit;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: $text-primary;
+}
+
+.link_active {
+  color: $text-accent !important;
+  border-bottom: 3px solid $brand;
+}
