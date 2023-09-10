@@ -6,8 +6,6 @@ import AboutUs from './pages/AboutUs/AboutUs';
 import Categories from './pages/Categories/Categories';
 import Products from './pages/Products/Products';
 
-import './App.scss';
-
 const App: React.FC = () => {
   return (
     <BrowserRouter>
