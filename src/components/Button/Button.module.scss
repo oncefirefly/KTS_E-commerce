@@ -1,6 +1,7 @@
 @use "/src/styles/variables" as *;
 
 .button {
+  cursor: pointer;
   display: inline-flex;
   min-height: 52px;
   padding: $space-s $space-l;
@@ -8,19 +9,32 @@
   align-items: center;
   gap: $space-xxs;
 
-  border: none;
-  border-radius: $border-radius;
-  background: $button-primary-bg;
-
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
+
+  border-radius: $border-radius;
+}
+
+.primary {
+  background: $button-primary-bg;
+  border: none;
   color: $button-primary-text;
 }
 
-.hovered {
+.secondary {
+  background: $button-secondary-bg;
+  border: 1px solid #afadb5;
+}
+
+.primary:hover {
   background: $button-primary-bg-hover;
+}
+
+.secondary:hover {
+  color: $button-secondary-text-hover;
+  background: $button-secondary-bg-hover;
 }
 
 .disabled {

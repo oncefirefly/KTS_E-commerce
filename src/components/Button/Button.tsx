@@ -4,19 +4,15 @@ import { ButtonProps } from 'utils/types/ButtonTypes';
 
 import buttonStyles from './Button.module.scss';
 
-const Button: React.FC<ButtonProps> = ({ children, className, disabled, onClick, ...props }) => {
-  const [buttonIsHovered, setButtonIsHovered] = React.useState(false);
-
+const Button: React.FC<ButtonProps> = ({ children, className, disabled, color = 'primary', onClick, ...props }) => {
   return (
     <button
       type="button"
       className={`${buttonStyles.button}${disabled ? ` ${buttonStyles.disabled}` : ''}${
         className ? ` ${className}` : ''
-      }${buttonIsHovered ? ` ${buttonStyles.hovered}` : ''}`}
+      } ${buttonStyles[color]}`}
       disabled={disabled}
       onClick={onClick}
-      onMouseOver={() => setButtonIsHovered(true)}
-      onMouseOut={() => setButtonIsHovered(false)}
       {...props}
     >
       {children}
