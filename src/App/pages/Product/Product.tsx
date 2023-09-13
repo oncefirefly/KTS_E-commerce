@@ -12,7 +12,6 @@ import { getProductById } from 'config/services/products';
 import { OneProduct } from 'utils/types/ProductTypes';
 
 import productStyles from './Product.module.scss';
-import 'styles/styles.scss';
 
 const Product: React.FC = () => {
   const { productId } = useParams();
@@ -64,7 +63,7 @@ const Product: React.FC = () => {
         </section>
       )}
       <section className={productStyles.product_related}>
-        <Text tag="h3" weight="bold" className={productStyles.product_related_title}>
+        <Text tag="h3" view="subtitle">
           Related Items
         </Text>
         <ProductCard

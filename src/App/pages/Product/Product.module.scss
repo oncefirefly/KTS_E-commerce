@@ -3,9 +3,6 @@
 .product_content {
   margin-top: 60px;
   margin-bottom: 146px;
-  //   display: flex;
-  //   flex-direction: column;
-  //   gap: $space-xl;
 }
 
 .product_back {
@@ -55,9 +52,4 @@
   display: flex;
   flex-direction: column;
   gap: $space-l;
-
-  .product_related_title {
-    font-size: 32px;
-    line-height: 48px;
-  }
 }
