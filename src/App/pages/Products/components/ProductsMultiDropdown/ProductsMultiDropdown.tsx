@@ -5,7 +5,7 @@ import { MultiDropdown } from 'components/';
 import { Option } from 'utils/types/MultiDropdownTypes';
 import { ProductsMultiDropdownProps } from 'utils/types/ProductTypes';
 
-const ProductsMultiDropdown: React.FC<ProductsMultiDropdownProps> = () => {
+export const ProductsMultiDropdown: React.FC<ProductsMultiDropdownProps> = () => {
   return (
     <MultiDropdown
       value={[]}
@@ -18,5 +18,3 @@ const ProductsMultiDropdown: React.FC<ProductsMultiDropdownProps> = () => {
     />
   );
 };
-
-export default ProductsMultiDropdown;

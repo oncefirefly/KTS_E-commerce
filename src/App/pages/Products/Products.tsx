@@ -6,15 +6,11 @@ import { Button, ProductCard } from 'components/';
 import { getProducts } from 'config/services/products';
 import { OneProduct } from 'utils/types/ProductTypes';
 
-import ProductsCount from './components/ProductsCount';
-import ProductsMultiDropdown from './components/ProductsMultiDropdown';
-import ProductsSearchInput from './components/ProductsSearchInput/ProductsSearchInput';
-import ProductsTitle from './components/ProductsTitle/ProductsTitle';
+import { ProductsCount, ProductsMultiDropdown, ProductsSearchInput, ProductsTitle } from './components';
 
-import 'styles/styles.scss';
 import productsStyles from './Products.module.scss';
 
-const Products: React.FC = () => {
+export const Products: React.FC = () => {
   const navigate = useNavigate();
 
   const [products, setProducts] = React.useState<OneProduct[] | []>([]);
@@ -61,5 +57,3 @@ const Products: React.FC = () => {
     </div>
   );
 };
-
-export default Products;

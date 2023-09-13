@@ -4,7 +4,7 @@ import { Text } from 'components/';
 
 import { ProductsCountProps } from 'utils/types/ProductTypes';
 
-const ProductsCount: React.FC<ProductsCountProps> = ({ className, count = 0 }) => {
+export const ProductsCount: React.FC<ProductsCountProps> = ({ className, count = 0 }) => {
   return (
     <div className={className || ''}>
       <Text tag="h3" view="subtitle">
@@ -16,5 +16,3 @@ const ProductsCount: React.FC<ProductsCountProps> = ({ className, count = 0 }) =
     </div>
   );
 };
-
-export default ProductsCount;

@@ -4,7 +4,7 @@ import { Text } from 'components/';
 
 import { ProductTitleProps } from 'utils/types/ProductTypes';
 
-const ProductsTitle: React.FC<ProductTitleProps> = ({ className }) => {
+export const ProductsTitle: React.FC<ProductTitleProps> = ({ className }) => {
   return (
     <section className={className || ''}>
       <Text tag="h1" view="title" color="primary" maxLines={1}>
@@ -17,5 +17,3 @@ const ProductsTitle: React.FC<ProductTitleProps> = ({ className }) => {
     </section>
   );
 };
-
-export default ProductsTitle;

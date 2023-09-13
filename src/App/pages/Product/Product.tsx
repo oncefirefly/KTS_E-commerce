@@ -11,7 +11,7 @@ import { OneProduct } from 'utils/types/ProductTypes';
 
 import productStyles from './Product.module.scss';
 
-const Product: React.FC = () => {
+export const Product: React.FC = () => {
   const { productId } = useParams();
 
   const [product, setProduct] = React.useState<OneProduct | null>(null);
@@ -75,5 +75,3 @@ const Product: React.FC = () => {
     </div>
   );
 };
-
-export default Product;

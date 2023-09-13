@@ -4,7 +4,7 @@ import { Button, Input, Text } from 'components/';
 
 import { ProductsSearchInputProps } from 'utils/types/ProductTypes';
 
-const ProductsSearchInput: React.FC<ProductsSearchInputProps> = (props) => {
+export const ProductsSearchInput: React.FC<ProductsSearchInputProps> = (props) => {
   const [searchValue, setSearchValue] = React.useState('');
 
   const handleInputChange = (value: string) => {
@@ -20,5 +20,3 @@ const ProductsSearchInput: React.FC<ProductsSearchInputProps> = (props) => {
     </div>
   );
 };
-
-export default ProductsSearchInput;
