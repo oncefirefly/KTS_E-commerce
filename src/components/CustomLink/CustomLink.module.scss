@@ -1,9 +1,11 @@
 @use "/src/styles/variables" as *;
 
 .link {
+  width: 100px;
   height: inherit;
   display: flex;
   align-items: center;
+  justify-content: center;
   text-decoration: none;
   color: $text-primary;
 }
