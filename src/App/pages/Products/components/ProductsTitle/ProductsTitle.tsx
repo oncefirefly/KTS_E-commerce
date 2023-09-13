@@ -4,9 +4,9 @@ import Text from 'components/Text';
 
 import { ProductTitleProps } from 'utils/types/ProductTypes';
 
-const ProductsTitle: React.FC<ProductTitleProps> = (props) => {
+const ProductsTitle: React.FC<ProductTitleProps> = ({ className }) => {
   return (
-    <section className={props.className || ''}>
+    <section className={className || ''}>
       <Text tag="h1" view="title" color="primary" maxLines={1}>
         Products
       </Text>
