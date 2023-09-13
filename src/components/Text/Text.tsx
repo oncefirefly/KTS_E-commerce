@@ -4,7 +4,15 @@ import { TextProps } from 'utils/types/TextTypes';
 
 import textStyles from './Text.module.scss';
 
-const Text: React.FC<TextProps> = ({ className, view, tag = 'p', weight, children, color, maxLines }: TextProps) => {
+export const Text: React.FC<TextProps> = ({
+  className,
+  view,
+  tag = 'p',
+  weight,
+  children,
+  color,
+  maxLines,
+}: TextProps) => {
   const CustomTag = tag;
 
   return (
@@ -28,5 +36,3 @@ const Text: React.FC<TextProps> = ({ className, view, tag = 'p', weight, childre
     </CustomTag>
   );
 };
-
-export default Text;

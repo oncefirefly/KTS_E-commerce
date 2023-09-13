@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import IconWrapper from 'components/icons/IconWrapper';
+import { IconWrapper } from 'components/icons/';
 
 import { IconProps } from 'utils/types/IconTypes';
 
 import logoStyles from './LogoIcon.module.scss';
 
-const LogoIcon: React.FC<IconProps> = (props) => {
+export const LogoIcon: React.FC<IconProps> = (props) => {
   return (
     <Link to="/" className={`${logoStyles.logo} ${props.className || ''}`}>
       <IconWrapper width="42" height="42" viewBox="0 0 42 42" fill="none">
@@ -53,5 +53,3 @@ const LogoIcon: React.FC<IconProps> = (props) => {
     </Link>
   );
 };
-
-export default LogoIcon;

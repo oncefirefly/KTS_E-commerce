@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import MultiDropdown from 'components/MultiDropdown';
+import { MultiDropdown } from 'components/';
 
 import { Option } from 'utils/types/MultiDropdownTypes';
 import { ProductsMultiDropdownProps } from 'utils/types/ProductTypes';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import Input from 'components/Input';
-import ArrowDownIcon from 'components/icons/ArrowDownIcon';
+import { Input } from 'components/';
+import { ArrowDownIcon } from 'components/icons/';
 
 import { useClickOutside } from 'utils/hooks/useClickOutside';
 
@@ -9,7 +9,7 @@ import { MultiDropdownProps, Option } from 'utils/types/MultiDropdownTypes';
 
 import dropdownStyles from './MultiDropdown.module.scss';
 
-const MultiDropdown: React.FC<MultiDropdownProps> = ({
+export const MultiDropdown: React.FC<MultiDropdownProps> = ({
   className,
   options,
   value,
@@ -96,5 +96,3 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
     </div>
   );
 };
-
-export default MultiDropdown;

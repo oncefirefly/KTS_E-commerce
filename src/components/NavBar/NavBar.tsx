@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import CustomLink from 'components/CustomLink';
+import { CustomLink } from 'components/';
 
 import { NavBarProps } from 'utils/types/NavTypes';
 
 import navBarStyles from './NavBar.module.scss';
 
-const NavBar: React.FC<NavBarProps> = (props) => {
+export const NavBar: React.FC<NavBarProps> = (props) => {
   return (
     <nav className={`${navBarStyles.nav}${props.className ? ` ${props.className}` : ''}`}>
       {props.navBarLinks.map((link) => (
@@ -15,5 +15,3 @@ const NavBar: React.FC<NavBarProps> = (props) => {
     </nav>
   );
 };
-
-export default NavBar;

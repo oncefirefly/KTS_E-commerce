@@ -1,17 +1,14 @@
 import * as React from 'react';
 
-import NavBar from 'components/NavBar/NavBar';
+import { NavBar } from 'components/';
 
-import CartIcon from 'components/icons/CartIcon';
-import LogoIcon from 'components/icons/LogoIcon';
-import UserIcon from 'components/icons/UserIcon';
+import { CartIcon, LogoIcon, UserIcon } from 'components/icons/';
 
 import { headerRoutes } from 'config/routes/routes.ts';
 
-import 'styles/styles.scss';
 import headerStyles from './Header.module.scss';
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
   return (
     <header className={headerStyles.header}>
       <div className={`${headerStyles.header_content} content_wrapper`}>
@@ -25,5 +22,3 @@ const Header: React.FC = () => {
     </header>
   );
 };
-
-export default Header;

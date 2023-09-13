@@ -4,7 +4,14 @@ import { ButtonProps } from 'utils/types/ButtonTypes';
 
 import buttonStyles from './Button.module.scss';
 
-const Button: React.FC<ButtonProps> = ({ children, className, disabled, color = 'primary', onClick, ...props }) => {
+export const Button: React.FC<ButtonProps> = ({
+  children,
+  className,
+  disabled,
+  color = 'primary',
+  onClick,
+  ...props
+}) => {
   return (
     <button
       type="button"
@@ -19,5 +26,3 @@ const Button: React.FC<ButtonProps> = ({ children, className, disabled, color = 
     </button>
   );
 };
-
-export default Button;

@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Button from 'components/Button';
-import ProductCard from 'components/ProductCard';
+import { Button, ProductCard } from 'components/';
 
 import { getProducts } from 'config/services/products';
 import { OneProduct } from 'utils/types/ProductTypes';

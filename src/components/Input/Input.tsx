@@ -4,7 +4,15 @@ import { InputProps } from 'utils/types/InputTypes';
 
 import inputStyles from './Input.module.scss';
 
-const Input: React.FC<InputProps> = ({ value, onChange, afterSlot, placeholder, className, disabled, ...props }) => {
+export const Input: React.FC<InputProps> = ({
+  value,
+  onChange,
+  afterSlot,
+  placeholder,
+  className,
+  disabled,
+  ...props
+}) => {
   const [isFocused, setIsFocused] = React.useState(false);
 
   return (
@@ -29,5 +37,3 @@ const Input: React.FC<InputProps> = ({ value, onChange, afterSlot, placeholder, 
     </label>
   );
 };
-
-export default Input;

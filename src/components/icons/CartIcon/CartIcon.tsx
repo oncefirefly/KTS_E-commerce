@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import IconWrapper from 'components/icons/IconWrapper';
+import { IconWrapper } from 'components/icons/';
 
-const CartIcon: React.FC = () => {
+export const CartIcon: React.FC = () => {
   return (
     <IconWrapper width="30" height="30" viewBox="0 0 30 30" fill="none" cursor="pointer">
       <path
@@ -26,5 +26,3 @@ const CartIcon: React.FC = () => {
     </IconWrapper>
   );
 };
-
-export default CartIcon;

@@ -2,10 +2,8 @@ import * as React from 'react';
 
 import { Link, useParams } from 'react-router-dom';
 
-import Button from 'components/Button';
-import ProductCard from 'components/ProductCard';
-import Text from 'components/Text';
-import ArrowLeftIcon from 'components/icons/ArrowLeftIcon';
+import { Button, ProductCard, Text } from 'components/';
+import { ArrowLeftIcon } from 'components/icons/';
 
 import { getProductById } from 'config/services/products';
 

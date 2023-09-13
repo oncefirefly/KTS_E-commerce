@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-import IconWrapper from 'components/icons/IconWrapper';
+import { IconWrapper } from 'components/icons/';
 
 import { getIconColor } from 'utils/functions/getIconColor';
 import { IconProps } from 'utils/types/IconTypes';
 
-const ArrowLeftIcon: React.FC<IconProps> = (props) => {
+export const ArrowLeftIcon: React.FC<IconProps> = (props) => {
   return (
     <IconWrapper width="32" height="32" viewBox="0 0 32 32" fill="none">
       <path
@@ -19,5 +19,3 @@ const ArrowLeftIcon: React.FC<IconProps> = (props) => {
     </IconWrapper>
   );
 };
-
-export default ArrowLeftIcon;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Header from 'components/Header';
+import { Header } from 'components/';
 
 import AboutUs from './pages/AboutUs/AboutUs';
 import Categories from './pages/Categories/Categories';

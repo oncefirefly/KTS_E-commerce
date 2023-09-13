@@ -1,13 +1,13 @@
 import * as React from 'react';
 
 import { NavLink } from 'react-router-dom';
-import Text from 'components/Text';
+import { Text } from 'components/';
 
 import { CustomLinkProps } from 'utils/types/NavTypes';
 
 import customLinkStyles from './CustomLink.module.scss';
 
-const CustomLink: React.FC<CustomLinkProps> = ({ link }: CustomLinkProps) => {
+export const CustomLink: React.FC<CustomLinkProps> = ({ link }: CustomLinkProps) => {
   const [isHovered, setIsHovered] = React.useState(false);
 
   const handleMouseOver = () => {
@@ -35,5 +35,3 @@ const CustomLink: React.FC<CustomLinkProps> = ({ link }: CustomLinkProps) => {
     </NavLink>
   );
 };
-
-export default CustomLink;

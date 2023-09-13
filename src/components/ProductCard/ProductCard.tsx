@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import Text from 'components/Text';
+import { Text } from 'components/';
 
 import { ProductCardProps } from 'utils/types/ProductTypes';
 
 import cardStyles from './ProductCard.module.scss';
 
-const ProductCard: React.FC<ProductCardProps> = ({
+export const ProductCard: React.FC<ProductCardProps> = ({
   className,
   image,
   captionSlot,
@@ -48,5 +48,3 @@ const ProductCard: React.FC<ProductCardProps> = ({
     </div>
   );
 };
-
-export default ProductCard;

@@ -1,6 +1,7 @@
 enum TextView {
   'title',
   'subtitle',
+  'button',
   'p-20',
   'p-18',
   'p-16',
