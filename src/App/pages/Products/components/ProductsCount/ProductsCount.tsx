@@ -6,14 +6,14 @@ import { ProductsCountProps } from 'utils/types/ProductTypes';
 
 const ProductsCount: React.FC<ProductsCountProps> = ({ className, count = 0 }) => {
   return (
-    <section className={className || ''}>
+    <div className={className || ''}>
       <Text tag="h3" view="subtitle">
         Total Products
       </Text>
       <Text view="p-20" weight="bold" color="accent">
         {count}
       </Text>
-    </section>
+    </div>
   );
 };
 

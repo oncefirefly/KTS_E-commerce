@@ -43,6 +43,19 @@
 
 .products_list {
   display: flex;
+  flex-direction: column;
+  gap: $space-l;
+}
+
+.products_count {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: $space-m;
+}
+
+.products_list_container {
+  display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   row-gap: 30px;
