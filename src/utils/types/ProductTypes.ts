@@ -11,6 +11,11 @@ export type ProductsMultiDropdownProps = {
   /* TODO: setProducts ... */
 };
 
+export type ProductsCountProps = {
+  className?: string;
+  count: number;
+};
+
 export type ProductCardProps = {
   /** Дополнительный classname */
   className?: string;
