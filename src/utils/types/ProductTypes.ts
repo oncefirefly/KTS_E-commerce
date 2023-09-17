@@ -2,6 +2,13 @@ export type ProductTitleProps = {
   className?: string;
 };
 
+export type ProductsListProps = {
+  className?: string;
+  products: OneProduct[] | [];
+  currentPage: number;
+  onPageChange: (page: number) => void;
+};
+
 export type ProductsSearchInputProps = {
   className?: string;
   onSearch: (value: string) => void;
