@@ -4,5 +4,6 @@ export { Header } from './Header/Header';
 export { Input } from './Input/Input';
 export { MultiDropdown } from './MultiDropdown/MultiDropdown';
 export { NavBar } from './NavBar/NavBar';
+export { Pagination } from './Pagination/Pagnation';
 export { ProductCard } from './ProductCard/ProductCard';
 export { Text } from './Text/Text';

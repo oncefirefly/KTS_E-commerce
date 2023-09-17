@@ -1,0 +1,31 @@
+@use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
+
+.pagination_container {
+  padding: 0;
+  @include flex(row, center, center, 0);
+  list-style: none;
+
+  .pagination_item {
+    cursor: pointer;
+    width: 38px;
+    height: 42px;
+    padding: 10px;
+    display: flex;
+
+    @include flex(column, center, center, 10px);
+    flex-wrap: nowrap;
+  }
+
+  .item_selected {
+    background: $brand;
+
+    p {
+      color: $button-primary-text !important;
+    }
+  }
+
+  .arrow_right {
+    transform: rotate(180deg);
+  }
+}
