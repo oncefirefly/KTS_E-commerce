@@ -4,7 +4,7 @@
 .link {
   width: 100px;
   height: inherit;
-  @include flex(row, center, center, none);
+  @include flex(row, center, center, 0);
   text-decoration: none;
   color: $text-primary;
 }

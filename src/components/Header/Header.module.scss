@@ -5,13 +5,13 @@
   width: 100%;
   height: 90px;
   border-radius: $border-radius;
-  border-bottom: 2px solid #f3f3f3;
-  background: #fff;
+  border-bottom: 2px solid $line-color;
+  background: $brand-white;
 }
 
 .header_content {
   height: 100%;
-  @include flex(row, center, flex-start, none);
+  @include flex(row, center, flex-start, 0);
 }
 
 .header_nav {

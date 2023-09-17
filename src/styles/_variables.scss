@@ -2,6 +2,10 @@
 $brand: #518581;
 $brand-hover: #86aaa7;
 $brand-active: #487773;
+$brand-white: #fff;
+
+/* secondary colors */
+$line-color: #f3f3f3;
 
 /* spaces */
 $space-xl: 48px;
@@ -24,8 +28,8 @@ $loader-bg: $brand;
 
 /* button */
 $button-primary-bg: $brand;
-$button-primary-text: #fff;
-$button-secondary-bg: #fff;
+$button-primary-text: $brand-white;
+$button-secondary-bg: $brand-white;
 $button-secondary-text: #000;
 
 $button-primary-bg-hover: $brand-hover;
@@ -41,9 +45,9 @@ $button-primary-text-active: $button-primary-text;
 
 /* input */
 $input-text: $text-primary;
-$input-bg: #fff;
+$input-bg: $brand-white;
 $input-placeholder: $text-secondary;
-$input-border: #fff;
+$input-border: $brand-white;
 
 $input-bg-focus: $input-bg;
 $input-border-focus: $brand;
@@ -54,4 +58,4 @@ $input-border-disabled: $input-border;
 $input-text-disabled: $text-primary;
 
 /* card */
-$card-bg: #fff;
+$card-bg: $brand-white;
