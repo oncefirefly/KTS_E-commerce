@@ -50,10 +50,10 @@ export const Product: React.FC = () => {
               <Text view="title">${product.price}</Text>
               <div className={productStyles.product_controls}>
                 <Button>
-                  <Text>Buy now</Text>
+                  <Text view="button">Buy now</Text>
                 </Button>
                 <Button color="secondary">
-                  <Text>Add to Cart</Text>
+                  <Text view="button">Add to Cart</Text>
                 </Button>
               </div>
             </div>
