@@ -1,18 +1,14 @@
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { Button, ProductCard } from 'components/';
 
 import { getProducts } from 'config/services/products';
 import { OneProduct } from 'utils/types/ProductTypes';
 
-import { ProductsCount, ProductsMultiDropdown, ProductsSearchInput, ProductsTitle } from './components';
+import { ProductsList, ProductsMultiDropdown, ProductsSearchInput, ProductsTitle } from './components';
 
 import productsStyles from './Products.module.scss';
 
 export const Products: React.FC = () => {
-  const navigate = useNavigate();
-
+  const [currentPage, setCurrentPage] = React.useState<number>(1);
   const [products, setProducts] = React.useState<OneProduct[] | []>([]);
 
   // TODO: search filter
@@ -30,6 +26,8 @@ export const Products: React.FC = () => {
     fetchProducts();
   }, []);
 
+  React.useEffect(() => {}, [currentPage]);
+
   return (
     <div className={`${productsStyles.products_content} content_wrapper`}>
       <ProductsTitle className={productsStyles.products_title} />
@@ -37,23 +35,12 @@ export const Products: React.FC = () => {
         <ProductsSearchInput className={productsStyles.products_search} onSearch={handleProductsSearch} />
         <ProductsMultiDropdown />
       </section>
-      <section className={productsStyles.products_list}>
-        <ProductsCount className={productsStyles.products_count} count={products.length} />
-        <div className={productsStyles.products_list_container}>
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              image={product.images[0]}
-              captionSlot={product.category}
-              title={product.title}
-              subtitle={product.description}
-              contentSlot={product.price}
-              actionSlot={<Button>Add to Cart</Button>}
-              onClick={() => navigate(`/product/${product.id}`)}
-            />
-          ))}
-        </div>
-      </section>
+      <ProductsList
+        className={productsStyles.products_list}
+        products={products}
+        currentPage={currentPage}
+        onPageChange={(page: number) => setCurrentPage(page)}
+      />
     </div>
   );
 };
