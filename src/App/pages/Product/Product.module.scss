@@ -1,4 +1,5 @@
 @use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
 
 .product_content {
   margin-top: 60px;
@@ -7,9 +8,7 @@
 
 .product_back {
   margin-bottom: $space-l;
-  display: flex;
-  align-items: center;
-  gap: $space-xs;
+  @include flex(row, center, flex-start, $space-xs);
 }
 
 .product_details {
@@ -24,32 +23,22 @@
 }
 
 .product_description {
-  display: flex;
-  flex-direction: column;
-  gap: $space-xl;
+  @include flex(column, stretch, flex-start, $space-xl);
 
   .product_primary {
-    display: flex;
-    flex-direction: column;
-    gap: $space-m;
+    @include flex(column, stretch, flex-start, $space-m);
   }
 
   .product_secondary {
     margin-top: $space-l;
-    display: flex;
-    flex-direction: column;
-    gap: $space-xl;
+    @include flex(column, stretch, flex-start, $space-xl);
 
     .product_controls {
-      display: flex;
-      align-items: flex-start;
-      gap: $space-xl;
+      @include flex(row, flex-start, flex-start, $space-xl);
     }
   }
 }
 
 .product_related {
-  display: flex;
-  flex-direction: column;
-  gap: $space-l;
+  @include flex(column, stretch, flex-start, $space-l);
 }

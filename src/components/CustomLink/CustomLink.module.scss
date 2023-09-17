@@ -1,11 +1,10 @@
 @use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
 
 .link {
   width: 100px;
   height: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex(row, center, center, none);
   text-decoration: none;
   color: $text-primary;
 }

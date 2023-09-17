@@ -1,4 +1,5 @@
 @use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
 
 .header {
   width: 100%;
@@ -10,8 +11,7 @@
 
 .header_content {
   height: 100%;
-  display: flex;
-  align-items: center;
+  @include flex(row, center, flex-start, none);
 }
 
 .header_nav {
@@ -19,7 +19,5 @@
 }
 
 .header_profile {
-  display: flex;
-  align-items: center;
-  gap: $space-m;
+  @include flex(row, center, flex-start, $space-m);
 }

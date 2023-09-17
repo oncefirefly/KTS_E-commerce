@@ -1,18 +1,13 @@
 @use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
 
 .button {
   cursor: pointer;
-  display: inline-flex;
+
   min-height: 52px;
   padding: $space-s $space-l;
-  justify-content: center;
-  align-items: center;
-  gap: $space-xxs;
 
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px;
+  @include flex(row, center, center, $space-xxs);
 
   border-radius: $border-radius;
 }

@@ -1,0 +1,9 @@
+@use "/src/styles/variables" as *;
+
+@mixin flex($direction: row, $align-items: stretch, $justify-content: flex-start, $gap: $space-s) {
+  display: flex;
+  flex-flow: $direction wrap;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  gap: $gap;
+}

@@ -1,19 +1,14 @@
 @use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
 
 .products_content {
   margin-top: 100px;
   margin-bottom: 48px;
-  display: flex;
-  flex-direction: column;
-  // align-items: flex-start;
-  gap: $space-xl;
+  @include flex(column, stretch, flex-start, $space-xl);
 }
 
 .products_title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: $space-m;
+  @include flex(column, center, flex-start, $space-m);
   flex-shrink: 0;
 
   p {
@@ -24,10 +19,7 @@
 
 .products_search {
   width: 100%;
-  display: flex;
-  // flex-flow: row wrap;
-  align-items: center;
-  justify-content: space-between;
+  @include flex(row, center, space-between, none);
 
   label {
     max-width: 1079px;
@@ -35,29 +27,20 @@
 }
 
 .products_search_controls {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: $space-m;
+  @include flex(column, flex-start, flex-start, $space-m);
 }
 
 .products_list {
-  display: flex;
-  flex-direction: column;
-  gap: $space-l;
+  @include flex(column, stretch, flex-start, $space-l);
 }
 
 .products_count {
   height: 48px;
-  display: flex;
-  align-items: center;
-  gap: $space-m;
+  @include flex(row, center, flex-start, $space-m);
 }
 
 .products_list_container {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
+  @include flex(row, stretch, space-between, none);
   row-gap: 30px;
   margin-bottom: 48px;
 }

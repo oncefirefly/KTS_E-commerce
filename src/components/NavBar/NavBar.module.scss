@@ -1,8 +1,7 @@
 @use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
 
 .nav {
   height: 100%;
-  display: flex;
-  align-items: center;
-  gap: $space-xl;
+  @include flex(row, center, flex-start, $space-xl);
 }

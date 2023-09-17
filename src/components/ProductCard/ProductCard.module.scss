@@ -1,14 +1,11 @@
 @use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
 
 .card_container {
   cursor: pointer;
   max-width: 360px;
-  display: inline-flex;
   padding-bottom: $space-xl;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: $space-xl;
-
+  @include flex(row, flex-start, flex-start, $space-xl);
   border-radius: $border-radius;
   background: $card-bg;
 
@@ -23,28 +20,18 @@
 
   .card_body {
     width: 100%;
-    display: flex;
     padding: 0px $space-xs;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: $space-l;
+    @include flex(column, flex-start, flex-start, $space-l);
   }
 
   .card_text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: $space-xxs;
+    @include flex(column, flex-start, center, $space-xxs);
     align-self: stretch;
   }
 
   .card_footer {
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    @include flex(row, center, space-between, none);
 
     span {
       display: flex;
