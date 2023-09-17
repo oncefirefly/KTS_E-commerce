@@ -1,32 +1,48 @@
+import { observer } from 'mobx-react-lite';
 import * as React from 'react';
+import { useSearchParams } from 'react-router-dom';
 
-import { getProducts } from 'config/services/products';
-import { OneProduct } from 'utils/types/ProductTypes';
+import ProductsStore from 'store/ProductsStore';
 
 import { ProductsList, ProductsMultiDropdown, ProductsSearchInput, ProductsTitle } from './components';
 
 import productsStyles from './Products.module.scss';
 
-export const Products: React.FC = () => {
-  const [currentPage, setCurrentPage] = React.useState<number>(1);
-  const [products, setProducts] = React.useState<OneProduct[] | []>([]);
+export const Products: React.FC = observer(() => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pageFromLocalStorage = localStorage.getItem('eCommerceProductsPage');
+  const [currentPage, setCurrentPage] = React.useState<number>(pageFromLocalStorage ? +pageFromLocalStorage : 1);
+
+  const productsStore = React.useMemo(() => {
+    return new ProductsStore();
+  }, []);
 
   // TODO: search filter
   const handleProductsSearch = (value: string) => {
     return value;
   };
 
-  const fetchProducts = async () => {
-    const fetchedProducts = await getProducts();
+  React.useEffect(() => {
+    const fetchProducts = async () => {
+      await productsStore.fetchProducts();
+    };
 
-    setProducts(fetchedProducts);
-  };
+    fetchProducts();
+  }, [productsStore]);
 
   React.useEffect(() => {
-    fetchProducts();
-  }, []);
+    const searchParamsData = Object.fromEntries(searchParams.entries());
 
-  React.useEffect(() => {}, [currentPage]);
+    if (searchParamsData.page) {
+      setCurrentPage(+searchParamsData.page);
+    }
+  }, [searchParams]);
+
+  React.useEffect(() => {
+    localStorage.setItem('eCommerceProductsPage', currentPage.toString());
+
+    setSearchParams({ page: currentPage.toString() });
+  }, [currentPage, setSearchParams]);
 
   return (
     <div className={`${productsStyles.products_content} content_wrapper`}>
@@ -37,10 +53,10 @@ export const Products: React.FC = () => {
       </section>
       <ProductsList
         className={productsStyles.products_list}
-        products={products}
+        products={productsStore.products}
         currentPage={currentPage}
         onPageChange={(page: number) => setCurrentPage(page)}
       />
     </div>
   );
-};
+});
