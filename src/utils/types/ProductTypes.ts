@@ -51,3 +51,9 @@ export type OneProduct = {
   images: string[];
   category: string;
 };
+
+export type ProductCategory = {
+  id: number;
+  name: string;
+  image: string;
+};
