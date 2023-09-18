@@ -7,7 +7,10 @@
 }
 
 .products_list_container {
-  @include flex(row, stretch, space-between, none);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(360px, 360px));
+  justify-content: space-between;
+  justify-items: stretch;
   row-gap: 30px;
   margin-bottom: 48px;
 }

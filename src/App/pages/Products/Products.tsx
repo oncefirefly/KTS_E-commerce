@@ -9,8 +9,9 @@ import { ProductsList, ProductsMultiDropdown, ProductsSearchInput, ProductsTitle
 import productsStyles from './Products.module.scss';
 
 export const Products: React.FC = observer(() => {
-  const [searchParams, setSearchParams] = useSearchParams();
   const pageFromLocalStorage = localStorage.getItem('eCommerceProductsPage');
+
+  const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = React.useState<number>(pageFromLocalStorage ? +pageFromLocalStorage : 1);
 
   const productsStore = React.useMemo(() => {
@@ -19,7 +20,7 @@ export const Products: React.FC = observer(() => {
 
   // TODO: search filter
   const handleProductsSearch = (value: string) => {
-    return value;
+    productsStore.filterProductsOnSearch(value);
   };
 
   React.useEffect(() => {
