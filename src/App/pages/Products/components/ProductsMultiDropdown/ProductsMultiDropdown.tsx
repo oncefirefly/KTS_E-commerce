@@ -9,7 +9,7 @@ import { categoriesToOptions } from 'utils/functions/categoriesToOptions';
 import { Option } from 'utils/types/MultiDropdownTypes';
 import { ProductsMultiDropdownProps } from 'utils/types/ProductTypes';
 
-export const ProductsMultiDropdown: React.FC<ProductsMultiDropdownProps> = observer(() => {
+export const ProductsMultiDropdown: React.FC<ProductsMultiDropdownProps> = observer(({ selectedOptions, onChange }) => {
   const categoriesStore = React.useMemo(() => {
     return new CategoriesStore();
   }, []);
@@ -24,11 +24,14 @@ export const ProductsMultiDropdown: React.FC<ProductsMultiDropdownProps> = obser
 
   return (
     <MultiDropdown
-      value={[]}
-      onChange={() => {}}
+      value={selectedOptions}
+      onChange={onChange}
       options={categoriesToOptions(categoriesStore.categories)}
       getTitle={(value: Option[]) => {
-        if (value.length) return value.join();
+        if (value.length) {
+          return value.map((option) => option.value).join(', ');
+        }
+
         return 'Filter';
       }}
     />

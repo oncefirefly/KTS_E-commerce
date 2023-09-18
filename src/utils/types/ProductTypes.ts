@@ -1,3 +1,5 @@
+import { Option } from 'utils/types/MultiDropdownTypes';
+
 export type ProductTitleProps = {
   className?: string;
 };
@@ -15,7 +17,8 @@ export type ProductsSearchInputProps = {
 };
 
 export type ProductsMultiDropdownProps = {
-  /* TODO: setProducts ... */
+  selectedOptions: Option[];
+  onChange: (options: Option[]) => void;
 };
 
 export type ProductsCountProps = {

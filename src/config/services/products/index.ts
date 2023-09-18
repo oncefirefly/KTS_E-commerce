@@ -1,10 +1,10 @@
 import { eCommerceInstance } from 'config/services/eCommerceInstance';
 import { OneProduct } from 'utils/types/ProductTypes';
 
-export const getProducts = (): Promise<OneProduct[]> =>
+export const getProducts = (categoryIds?: string): Promise<OneProduct[]> =>
   eCommerceInstance
-    .get('/products')
-    .then((productsResponse) => productsResponse.data.slice(0, 100))
+    .get(`/products?include=${categoryIds}`)
+    .then((productsResponse) => productsResponse.data)
     .catch((error) => {
       throw new Error(error);
     });

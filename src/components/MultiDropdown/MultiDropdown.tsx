@@ -51,8 +51,6 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
   });
 
   React.useEffect(() => {
-    console.log(options);
-
     setShownOptions(options);
   }, [options]);
 
