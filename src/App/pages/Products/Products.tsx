@@ -10,16 +10,13 @@ import { ProductsList, ProductsMultiDropdown, ProductsSearchInput, ProductsTitle
 
 import productsStyles from './Products.module.scss';
 
-let renderCount = 0;
-
 export const Products: React.FC = observer(() => {
-  console.log('render', ++renderCount);
-
   const pageFromLocalStorage = localStorage.getItem('eCommerceProductsPage');
   const searchValueFromLocalStorage = localStorage.getItem('eCommerceProductsSearch');
   const categoriesFromLocalStorage = JSON.parse(localStorage.getItem('eCommerceProductsCategories') as string);
 
   const [searchParams, setSearchParams] = useSearchParams();
+
   const [searchValue, setSearchValue] = React.useState<string>(searchValueFromLocalStorage || '');
   const [selectedCategories, setSelectedCategories] = React.useState<Option[]>(categoriesFromLocalStorage || []);
   const [currentPage, setCurrentPage] = React.useState<number>(pageFromLocalStorage ? +pageFromLocalStorage : 1);
@@ -28,36 +25,37 @@ export const Products: React.FC = observer(() => {
     return new ProductsStore();
   }, []);
 
-  const handleProductsSearch = React.useCallback(
-    (value: string) => {
-      productsStore.filterProductsOnSearch(value);
-
-      setSearchValue(value);
-      setCurrentPage(1);
-    },
-    [productsStore],
-  );
-
-  const handleCategoryFilter = React.useCallback(
-    (value: Option[]) => {
-      setSelectedCategories(value);
-      const selectedOptions = value.map((option) => option.key).join('|');
-
-      productsStore.fetchProducts(selectedOptions);
-    },
-    [productsStore],
-  );
-
-  React.useEffect(() => {
+  // setup products (including categories filter and search)
+  React.useMemo(() => {
     const setupProducts = async () => {
-      console.log('fetching...');
+      const selectedOptions = selectedCategories.map((option) => option.key).join('|');
 
-      await productsStore.fetchProducts();
+      await productsStore.fetchProducts(selectedOptions);
+
+      if (searchValue.length) {
+        productsStore.filterProductsOnSearch(searchValue);
+      }
     };
 
     setupProducts();
-  }, [productsStore]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [productsStore, selectedCategories]);
 
+  // updating states on searchParams change
+  React.useMemo(() => {
+    const searchParamsData = Object.fromEntries(searchParams.entries());
+
+    if (searchParamsData.page) setCurrentPage(+searchParamsData.page);
+
+    if (searchParamsData.search) setSearchValue(searchParamsData.search);
+  }, [searchParams]);
+
+  // filter products on searchValue change
+  React.useEffect(() => {
+    productsStore.filterProductsOnSearch(searchValue);
+  }, [productsStore, searchValue]);
+
+  // saving searchParams to Local Storage and updating existing searchParams
   React.useEffect(() => {
     const selectedCategoriesKeys = selectedCategories.map((category) => category.key).join('|');
 
@@ -68,20 +66,13 @@ export const Products: React.FC = observer(() => {
     setSearchParams({ page: currentPage.toString(), search: searchValue, categories: selectedCategoriesKeys });
   }, [currentPage, searchValue, selectedCategories, setSearchParams]);
 
-  React.useEffect(() => {
-    const searchParamsData = Object.fromEntries(searchParams.entries());
-
-    setCurrentPage(+searchParamsData.page);
-
-    setSearchValue(searchParamsData.search);
-  }, [searchParams]);
-
+  // TODO: classnames
   return (
     <div className={`${productsStyles.products_content} content_wrapper`}>
       <ProductsTitle className={productsStyles.products_title} />
       <section className={productsStyles.products_search_controls}>
-        <ProductsSearchInput className={productsStyles.products_search} onSearch={handleProductsSearch} />
-        <ProductsMultiDropdown selectedOptions={selectedCategories} onChange={handleCategoryFilter} />
+        <ProductsSearchInput className={productsStyles.products_search} onSearch={setSearchValue} />
+        <ProductsMultiDropdown selectedOptions={selectedCategories} onChange={setSelectedCategories} />
       </section>
       <ProductsList
         className={productsStyles.products_list}
