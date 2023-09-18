@@ -5,7 +5,8 @@ import { Button, Input, Text } from 'components/';
 import { ProductsSearchInputProps } from 'utils/types/ProductTypes';
 
 export const ProductsSearchInput: React.FC<ProductsSearchInputProps> = ({ className, onSearch }) => {
-  const [searchValue, setSearchValue] = React.useState('');
+  const searchValueFromLocalStorage = localStorage.getItem('eCommerceProductsSearch');
+  const [searchValue, setSearchValue] = React.useState(searchValueFromLocalStorage || '');
 
   const handleInputChange = (value: string) => {
     setSearchValue(value);
