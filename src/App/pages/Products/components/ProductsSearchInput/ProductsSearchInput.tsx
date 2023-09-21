@@ -4,17 +4,18 @@ import { Button, Input, Text } from 'components/';
 
 import { ProductsSearchInputProps } from 'utils/types/ProductTypes';
 
-export const ProductsSearchInput: React.FC<ProductsSearchInputProps> = (props) => {
-  const [searchValue, setSearchValue] = React.useState('');
+export const ProductsSearchInput: React.FC<ProductsSearchInputProps> = ({ className, onSearch }) => {
+  const searchValueFromLocalStorage = localStorage.getItem('eCommerceProductsSearch');
+  const [searchValue, setSearchValue] = React.useState(searchValueFromLocalStorage || '');
 
   const handleInputChange = (value: string) => {
     setSearchValue(value);
   };
 
   return (
-    <div className={props.className || ''}>
+    <div className={className || ''}>
       <Input value={searchValue} onChange={handleInputChange} placeholder="Search product" />
-      <Button onClick={() => props.onSearch(searchValue)}>
+      <Button onClick={() => onSearch(searchValue)}>
         <Text view="button">Find now</Text>
       </Button>
     </div>

@@ -3,13 +3,13 @@
 
 .dropdown_container {
   position: relative;
-  width: 300;
-  @include flex(row, flex-start, flex-start, $space-xxs);
+  width: 300px;
 }
 
 .dropdown {
   position: absolute;
   z-index: 100;
+  top: 55px;
   margin: 0;
   padding: 0;
   width: 100%;

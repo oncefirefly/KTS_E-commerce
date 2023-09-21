@@ -32,10 +32,14 @@ export const Pagination: React.FC<PaginationProps> = ({
   }
 
   const onNext = () => {
+    if (currentPage === lastPage) return;
+
     onPageChange(currentPage + 1);
   };
 
   const onPrevious = () => {
+    if (currentPage === 1) return;
+
     onPageChange(currentPage - 1);
   };
 

@@ -25,6 +25,10 @@
     }
   }
 
+  .item_disabled {
+    color: $text-secondary;
+  }
+
   .arrow_right {
     transform: rotate(180deg);
   }

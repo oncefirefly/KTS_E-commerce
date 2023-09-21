@@ -19,7 +19,8 @@
 
 .products_search {
   width: 100%;
-  @include flex(row, center, space-between, none);
+  @include flex(row, center, space-between, 0);
+  flex-wrap: nowrap;
 
   label {
     max-width: 1079px;
