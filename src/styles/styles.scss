@@ -1,0 +1,39 @@
+@import "./Roboto/fonts";
+
+html,
+body {
+  font-family: "Roboto", sans-serif !important;
+  margin: 0;
+  padding: 0;
+  background: #fafafa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+figure,
+pre {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.content_wrapper {
+  margin-inline: auto;
+  max-width: 1240px;
+}

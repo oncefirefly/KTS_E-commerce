@@ -1,0 +1,37 @@
+@use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
+
+.button {
+  cursor: pointer;
+
+  min-height: 52px;
+  padding: $space-s $space-l;
+
+  @include flex(row, center, center, $space-xxs);
+
+  border-radius: $border-radius;
+}
+
+.primary {
+  background: $button-primary-bg;
+  border: none;
+  color: $button-primary-text;
+}
+
+.secondary {
+  background: $button-secondary-bg;
+  border: 1px solid #afadb5;
+}
+
+.primary:hover {
+  background: $button-primary-bg-hover;
+}
+
+.secondary:hover {
+  color: $button-secondary-text-hover;
+  background: $button-secondary-bg-hover;
+}
+
+.disabled {
+  background: $button-primary-bg-disabled !important;
+}

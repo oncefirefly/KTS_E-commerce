@@ -1,0 +1,61 @@
+/* main colors */
+$brand: #518581;
+$brand-hover: #86aaa7;
+$brand-active: #487773;
+$brand-white: #fff;
+
+/* secondary colors */
+$line-color: #f3f3f3;
+
+/* spaces */
+$space-xl: 48px;
+$space-l: 32px;
+$space-m: 24px;
+$space-s: 16px;
+$space-xs: 12px;
+$space-xxs: 8px;
+
+/* text */
+$text-primary: #000;
+$text-secondary: #afadb5;
+$text-accent: $brand;
+
+/* border */
+$border-radius: 0;
+
+/* loader */
+$loader-bg: $brand;
+
+/* button */
+$button-primary-bg: $brand;
+$button-primary-text: $brand-white;
+$button-secondary-bg: $brand-white;
+$button-secondary-text: #000;
+
+$button-primary-bg-hover: $brand-hover;
+$button-primary-text-hover: $button-primary-text;
+$button-secondary-bg-hover: #afadb5;
+$button-secondary-text-hover: $button-secondary-text;
+
+$button-primary-bg-disabled: #d9d9d9;
+$button-primary-text-disabled: $button-primary-text;
+
+$button-primary-bg-active: $brand-active;
+$button-primary-text-active: $button-primary-text;
+
+/* input */
+$input-text: $text-primary;
+$input-bg: $brand-white;
+$input-placeholder: $text-secondary;
+$input-border: $brand-white;
+
+$input-bg-focus: $input-bg;
+$input-border-focus: $brand;
+$input-text-focus: $text-primary;
+
+$input-bg-disabled: $input-bg;
+$input-border-disabled: $input-border;
+$input-text-disabled: $text-primary;
+
+/* card */
+$card-bg: $brand-white;

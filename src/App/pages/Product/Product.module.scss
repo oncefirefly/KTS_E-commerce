@@ -1,0 +1,44 @@
+@use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
+
+.product_content {
+  margin-top: 60px;
+  margin-bottom: 146px;
+}
+
+.product_back {
+  margin-bottom: $space-l;
+  @include flex(row, center, flex-start, $space-xs);
+}
+
+.product_details {
+  display: flex;
+  gap: $space-xl;
+  margin-bottom: $space-xl;
+
+  img {
+    max-width: 600px;
+    max-height: 600px;
+  }
+}
+
+.product_description {
+  @include flex(column, stretch, flex-start, $space-xl);
+
+  .product_primary {
+    @include flex(column, stretch, flex-start, $space-m);
+  }
+
+  .product_secondary {
+    margin-top: $space-l;
+    @include flex(column, stretch, flex-start, $space-xl);
+
+    .product_controls {
+      @include flex(row, flex-start, flex-start, $space-xl);
+    }
+  }
+}
+
+.product_related {
+  @include flex(column, stretch, flex-start, $space-l);
+}

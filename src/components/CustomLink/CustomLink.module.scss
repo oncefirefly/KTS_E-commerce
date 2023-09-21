@@ -1,0 +1,15 @@
+@use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
+
+.link {
+  width: 100px;
+  height: inherit;
+  @include flex(row, center, center, 0);
+  text-decoration: none;
+  color: $text-primary;
+}
+
+.link_active {
+  color: $text-accent !important;
+  border-bottom: 3px solid $brand;
+}

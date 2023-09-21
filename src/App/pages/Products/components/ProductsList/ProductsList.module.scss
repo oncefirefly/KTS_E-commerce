@@ -1,0 +1,13 @@
+@use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
+
+.products_count {
+  height: 48px;
+  @include flex(row, center, flex-start, $space-m);
+}
+
+.products_list_container {
+  @include flex(row, stretch, space-between, none);
+  row-gap: 30px;
+  margin-bottom: 48px;
+}

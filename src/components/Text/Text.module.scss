@@ -1,0 +1,71 @@
+@use "/src/styles/variables" as *;
+
+.text {
+  color: inherit;
+  font-style: normal;
+  font-weight: 400;
+}
+
+// view prop
+.view-title {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 48px;
+}
+
+.view-subtitle {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 48px;
+}
+
+.view-button {
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.view-p-20 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.view-p-18 {
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.view-p-16 {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.view-p-14 {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+// weight prop
+.weight-normal {
+  font-weight: normal !important;
+}
+
+.weight-medium {
+  font-weight: 500 !important;
+}
+
+.weight-bold {
+  font-weight: bold !important;
+}
+
+// color prop
+.color-primary {
+  color: $text-primary;
+}
+
+.color-secondary {
+  color: $text-secondary;
+}
+
+.color-accent {
+  color: $text-accent;
+}
