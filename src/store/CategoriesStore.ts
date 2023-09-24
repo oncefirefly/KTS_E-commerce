@@ -11,7 +11,7 @@ export default class CategoriesStore {
     makeObservable<CategoriesStore, PrivateCategoriesStoreFields>(this, {
       _categories: observable,
       fetchCategories: action.bound,
-
+      findSelectedCategories: action.bound,
       categories: computed,
     });
   }
@@ -21,6 +21,10 @@ export default class CategoriesStore {
   }
 
   async fetchCategories() {
+    if (this._categories.length) {
+      return;
+    }
+
     const categoriesData = await getCategories();
 
     runInAction(() => {
