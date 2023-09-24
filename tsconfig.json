@@ -7,10 +7,8 @@
     "skipLibCheck": true,
 
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
     "jsx": "react-jsx",
 
     "strict": true,
@@ -20,11 +18,11 @@
 
     "baseUrl": "src",
     "paths": {
-      "components": ["components/*"],
-      "config": ["config/*"],
-      "styles": ["styles/*"],
-      "utils": ["utils/*"],
-      "store": ["store/*"]
+      "@components/*": ["components/*"],
+      "@config/*": ["config/*"],
+      "@styles/*": ["styles/*"],
+      "@utils/*": ["utils/*"],
+      "@store/*": ["store/*"]
     }
   },
   "include": ["src"],

@@ -4,7 +4,7 @@ import { NavBar } from 'components/';
 
 import { CartIcon, LogoIcon, UserIcon } from 'components/icons/';
 
-import { headerRoutes } from 'config/routes/routes.ts';
+import { headerRoutes } from 'config/routes/routes';
 
 import headerStyles from './Header.module.scss';
 
