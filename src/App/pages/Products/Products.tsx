@@ -9,6 +9,8 @@ import ProductsStore from '@store/ProductsStore';
 
 import { pageSize } from '@utils/constants/pageSize';
 import { categoriesToOptions } from '@utils/functions/categoriesToOptions';
+import { useSetSearchParams } from '@utils/hooks/useSetParams';
+
 import { Option } from '@utils/types/MultiDropdownTypes';
 
 import { ProductsList, ProductsSearchInput, ProductsTitle } from './components';
@@ -30,49 +32,56 @@ export const Products: React.FC = observer(() => {
     return new CategoriesStore();
   }, []);
 
+  useSetSearchParams('categories', selectedCategories, setSearchParams);
+  useSetSearchParams('search', searchValue, setSearchParams);
+  useSetSearchParams('page', currentPage.toString(), setSearchParams);
+
   React.useMemo(() => {
-    const selectedOptions = selectedCategories.map((option) => option.key).join('|');
+    const fetchProducts = async () => {
+      const searchParamsData = Object.fromEntries(searchParams.entries());
 
-    setSearchParams({ page: currentPage.toString(), search: searchValue, categories: selectedOptions });
-
-    const fetchProductsAndCategories = async () => {
       await productsStore.fetchProducts({
-        categoryIds: selectedOptions,
-        searchValue: searchValue,
-        offset: (currentPage - 1) * pageSize,
+        categoryIds: searchParamsData.categories || '',
+        searchValue: searchParamsData.search,
+        offset: (+searchParamsData.page - 1) * pageSize,
         limit: pageSize,
       });
       await categoriesStore.fetchCategories();
+
+      if (searchParamsData.categories) {
+        const selectedCategoryIds = searchParamsData.categories.split('|').map((id) => +id);
+        const selectedCategoriesFromIds = categoriesStore.findSelectedCategories(selectedCategoryIds);
+        const categories = categoriesToOptions(selectedCategoriesFromIds);
+
+        setSelectedCategories(categories);
+      }
+
+      if (searchParamsData.page) setCurrentPage(+searchParamsData.page);
+
+      if (searchParamsData.search) setSearchValue(searchParamsData.search);
     };
 
-    fetchProductsAndCategories();
-  }, [categoriesStore, currentPage, productsStore, searchValue, selectedCategories, setSearchParams]);
-
-  React.useMemo(() => {
-    const searchParamsData = Object.fromEntries(searchParams.entries());
-
-    if (searchParamsData.categories) {
-      const selectedCategoryIds = searchParamsData.categories.split('|').map((id) => +id);
-      const selectedCategoriesFromIds = categoriesStore.findSelectedCategories(selectedCategoryIds);
-      const categories = categoriesToOptions(selectedCategoriesFromIds);
-
-      setSelectedCategories(categories);
-    }
-
-    if (searchParamsData.page) setCurrentPage(+searchParamsData.page);
-
-    if (searchParamsData.search) setSearchValue(searchParamsData.search);
-  }, [categoriesStore, searchParams]);
+    fetchProducts();
+  }, [categoriesStore, productsStore, searchParams]);
 
   // TODO: classnames
   return (
     <div className={`${productsStyles.products_content} content_wrapper`}>
       <ProductsTitle className={productsStyles.products_title} />
       <section className={productsStyles.products_search_controls}>
-        <ProductsSearchInput className={productsStyles.products_search} onSearch={setSearchValue} />
+        <ProductsSearchInput
+          className={productsStyles.products_search}
+          onSearch={(value) => {
+            setSearchValue(value);
+            setCurrentPage(1);
+          }}
+        />
         <MultiDropdown
           value={selectedCategories}
-          onChange={(value: Option[]) => setSelectedCategories(value)}
+          onChange={(value: Option[]) => {
+            setSelectedCategories(value);
+            setCurrentPage(1);
+          }}
           options={categoriesToOptions(categoriesStore.categories)}
           getTitle={(value: Option[]) => {
             if (value.length) {
