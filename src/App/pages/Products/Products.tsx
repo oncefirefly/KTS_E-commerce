@@ -7,8 +7,8 @@ import { MultiDropdown } from '@components/index';
 import CategoriesStore from '@store/CategoriesStore';
 import ProductsStore from '@store/ProductsStore';
 
+import { pageSize } from '@utils/constants/pageSize';
 import { categoriesToOptions } from '@utils/functions/categoriesToOptions';
-
 import { Option } from '@utils/types/MultiDropdownTypes';
 
 import { ProductsList, ProductsSearchInput, ProductsTitle } from './components';
@@ -30,43 +30,39 @@ export const Products: React.FC = observer(() => {
     return new CategoriesStore();
   }, []);
 
-  // setup products (including categories filter and search)
   React.useMemo(() => {
-    const setupProducts = async () => {
-      const selectedOptions = selectedCategories.map((option) => option.key).join('|');
+    const selectedOptions = selectedCategories.map((option) => option.key).join('|');
 
-      await productsStore.fetchProducts({ categoryIds: selectedOptions });
+    setSearchParams({ page: currentPage.toString(), search: searchValue, categories: selectedOptions });
+
+    const fetchProductsAndCategories = async () => {
+      await productsStore.fetchProducts({
+        categoryIds: selectedOptions,
+        searchValue: searchValue,
+        offset: (currentPage - 1) * pageSize,
+        limit: pageSize,
+      });
       await categoriesStore.fetchCategories();
-
-      if (searchValue.length) {
-        productsStore.filterProductsOnSearch(searchValue);
-      }
     };
 
-    setupProducts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [productsStore, selectedCategories]);
+    fetchProductsAndCategories();
+  }, [categoriesStore, currentPage, productsStore, searchValue, selectedCategories, setSearchParams]);
 
-  // updating states on searchParams change
   React.useMemo(() => {
     const searchParamsData = Object.fromEntries(searchParams.entries());
+
+    if (searchParamsData.categories) {
+      const selectedCategoryIds = searchParamsData.categories.split('|').map((id) => +id);
+      const selectedCategoriesFromIds = categoriesStore.findSelectedCategories(selectedCategoryIds);
+      const categories = categoriesToOptions(selectedCategoriesFromIds);
+
+      setSelectedCategories(categories);
+    }
 
     if (searchParamsData.page) setCurrentPage(+searchParamsData.page);
 
     if (searchParamsData.search) setSearchValue(searchParamsData.search);
-  }, [searchParams]);
-
-  // filter products on searchValue change
-  React.useEffect(() => {
-    productsStore.filterProductsOnSearch(searchValue);
-  }, [productsStore, searchValue]);
-
-  // saving searchParams to Local Storage and updating existing searchParams
-  React.useEffect(() => {
-    // const selectedCategoriesKeys = selectedCategories.map((category) => category.key).join('|');
-
-    setSearchParams({ page: currentPage.toString(), search: searchValue });
-  }, [currentPage, searchValue, selectedCategories, setSearchParams]);
+  }, [categoriesStore, searchParams]);
 
   // TODO: classnames
   return (
@@ -90,6 +86,7 @@ export const Products: React.FC = observer(() => {
       <ProductsList
         className={productsStyles.products_list}
         products={productsStore.products}
+        totalProductsCount={productsStore.total}
         currentPage={currentPage}
         onPageChange={(page: number) => setCurrentPage(page)}
       />

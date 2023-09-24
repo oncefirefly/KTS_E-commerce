@@ -11,6 +11,7 @@ export default class CategoriesStore {
     makeObservable<CategoriesStore, PrivateCategoriesStoreFields>(this, {
       _categories: observable,
       fetchCategories: action.bound,
+
       categories: computed,
     });
   }
@@ -25,5 +26,17 @@ export default class CategoriesStore {
     runInAction(() => {
       this._categories = categoriesData;
     });
+  }
+
+  findSelectedCategories(selectedIds: number[]) {
+    return selectedIds.reduce((selectedOptions, selectedId) => {
+      const foundCategory = this._categories.find((category) => category.id === +selectedId);
+
+      if (foundCategory) {
+        selectedOptions.push(foundCategory);
+      }
+
+      return selectedOptions;
+    }, [] as ProductCategory[]);
   }
 }

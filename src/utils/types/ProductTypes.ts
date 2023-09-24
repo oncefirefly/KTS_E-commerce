@@ -8,12 +8,12 @@ export type ProductsListProps = {
   className?: string;
   products: OneProduct[] | [];
   currentPage: number;
+  totalProductsCount: number;
   onPageChange: (page: number) => void;
 };
 
 export type ProductsSearchInputProps = {
   className?: string;
-  defaultValue?: string;
   onSearch: (value: string) => void;
 };
 
