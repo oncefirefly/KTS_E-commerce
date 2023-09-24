@@ -7,7 +7,11 @@
 }
 
 .product_back {
+  cursor: pointer;
   margin-bottom: $space-l;
+  border: none;
+  background: transparent;
+  padding: 0;
   @include flex(row, center, flex-start, $space-xs);
 }
 

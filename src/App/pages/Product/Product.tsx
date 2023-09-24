@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { ArrowLeftIcon } from '@components/icons/index';
 import { Button, ProductCard, Text } from '@components/index';
@@ -13,6 +13,8 @@ import productStyles from './Product.module.scss';
 
 export const Product: React.FC = () => {
   const { productId } = useParams();
+
+  const navigate = useNavigate();
 
   const [product, setProduct] = React.useState<OneProduct | null>(null);
 
@@ -28,12 +30,12 @@ export const Product: React.FC = () => {
 
   return (
     <div className={`${productStyles.product_content} content_wrapper`}>
-      <Link to={'..'} className={productStyles.product_back}>
+      <button onClick={() => navigate(-1)} className={productStyles.product_back}>
         <ArrowLeftIcon color="primary" />
         <Text view="p-20" color="primary">
           Назад
         </Text>
-      </Link>
+      </button>
       {product && Object.keys(product).length && (
         <section className={productStyles.product_details}>
           <img src={product.images[0]} alt="product" />
