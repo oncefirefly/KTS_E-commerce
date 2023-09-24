@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { TextProps } from 'utils/types/TextTypes';
+import { TextProps } from '@utils/types/TextTypes';
 
 import textStyles from './Text.module.scss';
 

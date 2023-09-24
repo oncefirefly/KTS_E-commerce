@@ -1,11 +1,12 @@
 import * as React from 'react';
 
-import { InputProps } from 'utils/types/InputTypes';
+import { InputProps } from '@utils/types/InputTypes';
 
 import inputStyles from './Input.module.scss';
 
 export const Input: React.FC<InputProps> = ({
   value,
+  defaultValue,
   onChange,
   afterSlot,
   placeholder,
@@ -26,6 +27,7 @@ export const Input: React.FC<InputProps> = ({
         id="customInput"
         type="text"
         value={value}
+        defaultValue={defaultValue}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         disabled={disabled}

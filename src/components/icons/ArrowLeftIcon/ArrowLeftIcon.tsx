@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { IconWrapper } from 'components/icons/';
+import { IconWrapper } from '@components/icons/index';
 
-import { getIconColor } from 'utils/functions/getIconColor';
-import { IconProps } from 'utils/types/IconTypes';
+import { getIconColor } from '@utils/functions/getIconColor';
+import { IconProps } from '@utils/types/IconTypes';
 
 export const ArrowLeftIcon: React.FC<IconProps> = (props) => {
   return (

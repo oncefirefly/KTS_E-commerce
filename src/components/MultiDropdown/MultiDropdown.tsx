@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-import { Input } from 'components/';
-import { ArrowDownIcon } from 'components/icons/';
+import { ArrowDownIcon } from '@components/icons/index';
+import { Input } from '@components/index';
 
-import { useClickOutside } from 'utils/hooks/useClickOutside';
+import { useClickOutside } from '@utils/hooks/useClickOutside';
 
-import { MultiDropdownProps, Option } from 'utils/types/MultiDropdownTypes';
+import { MultiDropdownProps, Option } from '@utils/types/MultiDropdownTypes';
 
 import dropdownStyles from './MultiDropdown.module.scss';
 

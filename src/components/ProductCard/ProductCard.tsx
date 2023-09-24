@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { Text } from 'components/';
+import { Text } from '@components/index';
 
-import { ProductCardProps } from 'utils/types/ProductTypes';
+import { ProductCardProps } from '@utils/types/ProductTypes';
 
 import cardStyles from './ProductCard.module.scss';
 

@@ -2,12 +2,12 @@ import * as React from 'react';
 
 import { Link, useParams } from 'react-router-dom';
 
-import { Button, ProductCard, Text } from 'components/';
-import { ArrowLeftIcon } from 'components/icons/';
+import { ArrowLeftIcon } from '@components/icons/index';
+import { Button, ProductCard, Text } from '@components/index';
 
-import { getProductById } from 'config/services/products';
+import { getProductById } from '@config/services/products';
 
-import { OneProduct } from 'utils/types/ProductTypes';
+import { OneProduct } from '@utils/types/ProductTypes';
 
 import productStyles from './Product.module.scss';
 

@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { CustomLink } from 'components/';
+import { CustomLink } from '@components/index';
 
-import { NavBarProps } from 'utils/types/NavTypes';
+import { NavBarProps } from '@utils/types/NavTypes';
 
 import navBarStyles from './NavBar.module.scss';
 

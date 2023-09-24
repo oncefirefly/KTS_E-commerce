@@ -1,7 +1,7 @@
 import { action, computed, makeObservable, observable, runInAction } from 'mobx';
-import { getProducts } from 'config/services/products';
+import { getProducts } from '@config/services/products';
 
-import { OneProduct } from 'utils/types/ProductTypes';
+import { OneProduct } from '@utils/types/ProductTypes';
 
 type PrivateProductsStoreFields = '_products' | '_filteredProducts';
 
@@ -23,8 +23,8 @@ export default class ProductsStore {
     return this._filteredProducts;
   }
 
-  async fetchProducts(categoryIds?: string) {
-    const productsData = await getProducts(categoryIds || '');
+  async fetchProducts({ categoryIds = '', searchValue = '', offset = 0, limit = Infinity }) {
+    const productsData = await getProducts({ categoryIds, searchValue, offset, limit });
 
     runInAction(() => {
       this._products = productsData;

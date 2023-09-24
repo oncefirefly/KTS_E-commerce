@@ -36,11 +36,11 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json'],
     alias: {
-      components: path.join(appPath, 'components'),
-      config: path.join(appPath, 'config'),
-      styles: path.join(appPath, 'styles'),
-      utils: path.join(appPath, 'utils'),
-      store: path.join(appPath, 'store'),
+      '@components': path.join(appPath, '/components'),
+      '@config': path.join(appPath, '/config/'),
+      '@styles': path.join(appPath, '/styles/'),
+      '@utils': path.join(appPath, '/utils'),
+      '@store': path.join(appPath, '/store'),
     },
   },
 

@@ -1,4 +1,4 @@
-import { NavLink } from 'utils/types/NavTypes';
+import { NavLink } from '@utils/types/NavTypes';
 
 export const headerRoutes: NavLink[] = [
   {

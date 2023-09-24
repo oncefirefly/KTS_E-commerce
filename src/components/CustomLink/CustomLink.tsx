@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import { NavLink } from 'react-router-dom';
-import { Text } from 'components/';
+import { Text } from '@components/index';
 
-import { CustomLinkProps } from 'utils/types/NavTypes';
+import { CustomLinkProps } from '@utils/types/NavTypes';
 
 import customLinkStyles from './CustomLink.module.scss';
 

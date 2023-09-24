@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { Text } from 'components/';
+import { Text } from '@components/index';
 
-import { ProductTitleProps } from 'utils/types/ProductTypes';
+import { ProductTitleProps } from '@utils/types/ProductTypes';
 
 export const ProductsTitle: React.FC<ProductTitleProps> = ({ className }) => {
   return (

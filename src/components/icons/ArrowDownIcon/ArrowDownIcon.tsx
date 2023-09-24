@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import { IconWrapper } from 'components/icons/';
+import { IconWrapper } from '@components/icons/index';
 
-import { getIconColor } from 'utils/functions/getIconColor';
+import { getIconColor } from '@utils/functions/getIconColor';
 
-import { IconProps } from 'utils/types/IconTypes';
+import { IconProps } from '@utils/types/IconTypes';
 
 export const ArrowDownIcon: React.FC<IconProps> = (props) => {
   return (

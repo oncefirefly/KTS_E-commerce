@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import { NavBar } from 'components/';
+import { CartIcon, LogoIcon, UserIcon } from '@components/icons/index';
 
-import { CartIcon, LogoIcon, UserIcon } from 'components/icons/';
+import { NavBar } from '@components/index';
 
-import { headerRoutes } from 'config/routes/routes';
+import { headerRoutes } from '@config/routes/routes';
 
 import headerStyles from './Header.module.scss';
 

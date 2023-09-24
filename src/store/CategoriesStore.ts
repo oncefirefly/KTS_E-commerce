@@ -1,6 +1,6 @@
 import { action, computed, makeObservable, observable, runInAction } from 'mobx';
-import { getCategories } from 'config/services/categories';
-import { ProductCategory } from 'utils/types/ProductTypes';
+import { getCategories } from '@config/services/categories';
+import { ProductCategory } from '@utils/types/ProductTypes';
 
 type PrivateCategoriesStoreFields = '_categories';
 

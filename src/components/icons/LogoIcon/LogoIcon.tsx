@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { IconWrapper } from 'components/icons/';
+import { IconWrapper } from '@components/icons/index';
 
-import { IconProps } from 'utils/types/IconTypes';
+import { IconProps } from '@utils/types/IconTypes';
 
 import logoStyles from './LogoIcon.module.scss';
 

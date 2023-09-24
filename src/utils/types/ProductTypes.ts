@@ -1,4 +1,4 @@
-import { Option } from 'utils/types/MultiDropdownTypes';
+import { Option } from '@utils/types/MultiDropdownTypes';
 
 export type ProductTitleProps = {
   className?: string;
@@ -13,6 +13,7 @@ export type ProductsListProps = {
 
 export type ProductsSearchInputProps = {
   className?: string;
+  defaultValue?: string;
   onSearch: (value: string) => void;
 };
 

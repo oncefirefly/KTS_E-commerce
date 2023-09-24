@@ -2,9 +2,9 @@ import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Button, ProductCard, Pagination } from 'components/';
+import { Button, ProductCard, Pagination } from '@components/index';
 
-import { OneProduct, ProductsListProps } from 'utils/types/ProductTypes';
+import { OneProduct, ProductsListProps } from '@utils/types/ProductTypes';
 
 import { ProductsCount } from '../';
 

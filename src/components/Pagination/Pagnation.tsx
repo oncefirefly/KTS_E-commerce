@@ -1,12 +1,12 @@
 import classnames from 'classnames';
 import * as React from 'react';
 
-import { Text } from 'components/';
-import { ArrowLeftIcon } from 'components/icons';
+import { ArrowLeftIcon } from '@components/icons/index';
+import { Text } from '@components/index';
 
-import { usePagination, DOTS } from 'utils/hooks/usePagination';
+import { usePagination, DOTS } from '@utils/hooks/usePagination';
 
-import { PaginationProps } from 'utils/types/PaginationTypes';
+import { PaginationProps } from '@utils/types/PaginationTypes';
 
 import paginationStyles from './Pagination.module.scss';
 
