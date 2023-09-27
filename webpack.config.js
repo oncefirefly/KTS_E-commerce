@@ -2,11 +2,37 @@
 const path = require('path');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const appPath = path.resolve(__dirname, 'src');
 const buildPath = path.resolve(__dirname, 'dist');
 
 const isProd = process.env.NODE_ENV === 'production';
+
+const getSettingsForStyles = (withModules = false) => {
+  return [
+    MiniCssExtractPlugin.loader,
+    !withModules
+      ? 'css-loader'
+      : {
+          loader: 'css-loader',
+          options: {
+            modules: {
+              localIdentName: !isProd ? '[path][name]__[local]' : '[hash:base64]',
+            },
+          },
+        },
+    {
+      loader: 'postcss-loader',
+      options: {
+        postcssOptions: {
+          plugins: ['autoprefixer'],
+        },
+      },
+    },
+    'sass-loader',
+  ];
+};
 
 module.exports = {
   entry: appPath,
@@ -31,6 +57,9 @@ module.exports = {
       template: path.join(appPath, 'index.html'),
     }),
     !isProd && new ReactRefreshWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name]-[hash].css',
+    }),
   ].filter(Boolean),
 
   resolve: {
@@ -52,18 +81,13 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.s[ac]ss$/i,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'resolve-url-loader',
-            options: {
-              debug: true,
-            },
-          },
-          'sass-loader',
-        ],
+        test: /\.module\.s?css$/,
+        use: getSettingsForStyles(true),
+      },
+      {
+        test: /\.s?css$/,
+        exclude: /\.module\.s?css$/,
+        use: getSettingsForStyles(),
       },
       {
         test: /\.(png|svg|jpg)$/,
