@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -7,9 +8,9 @@ import { IconProps } from '@utils/types/IconTypes';
 
 import logoStyles from './LogoIcon.module.scss';
 
-export const LogoIcon: React.FC<IconProps> = (props) => {
+export const LogoIcon: React.FC<IconProps> = ({ className }) => {
   return (
-    <Link to="/" className={`${logoStyles.logo} ${props.className || ''}`}>
+    <Link to="/" className={classNames(logoStyles.logo, { [`${className}`]: className })}>
       <IconWrapper width="42" height="42" viewBox="0 0 42 42" fill="none">
         <g clipPath="url(#clip0_502_630)">
           <path d="M42 0H0V42H42V0Z" fill="white" />

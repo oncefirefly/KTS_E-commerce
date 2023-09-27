@@ -1,6 +1,7 @@
+import classNames from 'classnames';
 import * as React from 'react';
-
 import { NavLink } from 'react-router-dom';
+
 import { Text } from '@components/index';
 
 import { CustomLinkProps } from '@utils/types/NavTypes';
@@ -23,9 +24,7 @@ export const CustomLink: React.FC<CustomLinkProps> = ({ link }: CustomLinkProps)
       to={link.path}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
-      className={({ isActive }) =>
-        isActive ? `${customLinkStyles.link} ${customLinkStyles.link_active}` : customLinkStyles.link
-      }
+      className={({ isActive }) => classNames(customLinkStyles.link, { [customLinkStyles.link_active]: isActive })}
     >
       {({ isActive }) => (
         <Text view="p-18" weight={isHovered || isActive ? 'bold' : 'medium'}>

@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -10,7 +12,6 @@ import ProductsStore from '@store/ProductsStore';
 import { pageSize } from '@utils/constants/pageSize';
 import { categoriesToOptions } from '@utils/functions/categoriesToOptions';
 import { useSetSearchParams } from '@utils/hooks/useSetParams';
-
 import { Option } from '@utils/types/MultiDropdownTypes';
 
 import { ProductsList, ProductsSearchInput, ProductsTitle } from './components';
@@ -64,9 +65,8 @@ export const Products: React.FC = observer(() => {
     fetchProducts();
   }, [categoriesStore, productsStore, searchParams]);
 
-  // TODO: classnames
   return (
-    <div className={`${productsStyles.products_content} content_wrapper`}>
+    <div className={classNames(productsStyles.product_content, 'content_wrapper')}>
       <ProductsTitle className={productsStyles.products_title} />
       <section className={productsStyles.products_search_controls}>
         <ProductsSearchInput

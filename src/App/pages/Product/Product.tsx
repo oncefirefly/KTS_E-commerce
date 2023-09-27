@@ -1,5 +1,6 @@
-import * as React from 'react';
+import classNames from 'classnames';
 
+import * as React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { ArrowLeftIcon } from '@components/icons/index';
@@ -28,8 +29,10 @@ export const Product: React.FC = () => {
     if (productId) fetchProductById(productId);
   }, [productId]);
 
+  // `${productStyles.product_content} content_wrapper`
+
   return (
-    <div className={`${productStyles.product_content} content_wrapper`}>
+    <div className={classNames(productStyles.product_content, 'content_wrapper')}>
       <button onClick={() => navigate(-1)} className={productStyles.product_back}>
         <ArrowLeftIcon color="primary" />
         <Text view="p-20" color="primary">
@@ -62,6 +65,7 @@ export const Product: React.FC = () => {
           </div>
         </section>
       )}
+      {/* TODO: Related Items component */}
       <section className={productStyles.product_related}>
         <Text tag="h3" view="subtitle">
           Related Items

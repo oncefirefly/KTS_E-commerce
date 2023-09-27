@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import * as React from 'react';
 
 import { InputProps } from '@utils/types/InputTypes';
@@ -19,9 +20,11 @@ export const Input: React.FC<InputProps> = ({
   return (
     <label
       htmlFor="customInput"
-      className={`${inputStyles.input_label}${className ? ` ${className}` : ''}${
-        isFocused ? ` ${inputStyles.focused}` : ''
-      }${disabled ? ` ${inputStyles.disabled}` : ''}`}
+      className={classNames(inputStyles.input_label, {
+        [`${className}`]: className,
+        [inputStyles.focused]: isFocused,
+        [inputStyles.disabled]: disabled,
+      })}
     >
       <input
         id="customInput"

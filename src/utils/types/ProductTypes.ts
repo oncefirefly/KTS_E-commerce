@@ -40,10 +40,10 @@ export type ProductCardProps = {
   subtitle: React.ReactNode;
   /** Содержимое карточки (футер/боковая часть), может быть пустым */
   contentSlot?: React.ReactNode;
-  /** Клик на карточку */
-  onClick?: React.MouseEventHandler;
   /** Слот для действия */
   actionSlot?: React.ReactNode;
+  /** Клик на карточку */
+  onClick?: React.MouseEventHandler;
 };
 
 export type OneProduct = {

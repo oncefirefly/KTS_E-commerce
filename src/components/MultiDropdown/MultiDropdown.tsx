@@ -1,10 +1,10 @@
+import classNames from 'classnames';
 import * as React from 'react';
 
 import { ArrowDownIcon } from '@components/icons/index';
 import { Input } from '@components/index';
 
 import { useClickOutside } from '@utils/hooks/useClickOutside';
-
 import { MultiDropdownProps, Option } from '@utils/types/MultiDropdownTypes';
 
 import dropdownStyles from './MultiDropdown.module.scss';
@@ -64,7 +64,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
 
   return (
     <div
-      className={`${dropdownStyles.dropdown_container} ${className ? ` ${className}` : ''}`}
+      className={classNames(dropdownStyles.dropdown_container, { [`${className}`]: className })}
       ref={dropdownRef}
       {...props}
     >
@@ -84,7 +84,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
           {!disabled &&
             shownOptions.map((option) => (
               <li
-                className={`${optionIsSelected(option) ? dropdownStyles.selected : ''}`}
+                className={classNames({ [dropdownStyles.selected]: optionIsSelected(option) })}
                 key={option.key}
                 onClick={() => handleOptionClick(option)}
               >

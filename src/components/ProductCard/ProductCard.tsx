@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import * as React from 'react';
 
 import { Text } from '@components/index';
@@ -6,6 +7,8 @@ import { ProductCardProps } from '@utils/types/ProductTypes';
 
 import cardStyles from './ProductCard.module.scss';
 
+// `${cardStyles.card_container} ${className ? ` ${className}` : ''}`
+
 export const ProductCard: React.FC<ProductCardProps> = ({
   className,
   image,
@@ -13,12 +16,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   title,
   subtitle,
   contentSlot,
-  onClick,
   actionSlot,
+  onClick,
   ...props
 }: ProductCardProps) => {
   return (
-    <div className={`${cardStyles.card_container} ${className ? ` ${className}` : ''}`} onClick={onClick} {...props}>
+    <div
+      className={classNames(cardStyles.card_container, { [`${className}`]: className })}
+      onClick={onClick}
+      {...props}
+    >
       <div className={cardStyles.card_header}>
         <img src={image} alt="card_thumbnail" />
       </div>
