@@ -6,4 +6,6 @@ import 'regenerator-runtime';
 import '@styles/styles.scss';
 import '@config/configureMobX';
 
-createRoot(document.getElementById('root')!).render((<App />) as keyof React.ReactNode);
+const root = createRoot(document.getElementById('root') as HTMLElement);
+
+root.render((<App />) as keyof React.ReactNode);

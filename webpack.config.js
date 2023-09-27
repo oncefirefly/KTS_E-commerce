@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const TsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -60,6 +61,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name]-[hash].css',
     }),
+    new TsCheckerPlugin(),
   ].filter(Boolean),
 
   resolve: {
@@ -76,8 +78,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(ts|js)x?$/,
-        use: [{ loader: 'babel-loader' }, { loader: 'ts-loader' }],
+        test: /\.[tj]sx?$/,
+        use: 'babel-loader',
         exclude: /node_modules/,
       },
       {

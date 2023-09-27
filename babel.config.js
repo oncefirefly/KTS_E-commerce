@@ -3,6 +3,6 @@ module.exports = (api) => {
 
   return {
     plugins: [process.env.NODE_ENV === 'development' && 'react-refresh/babel'].filter(Boolean),
-    presets: ['@babel/preset-env', '@babel/preset-react'],
+    presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
   };
 };
