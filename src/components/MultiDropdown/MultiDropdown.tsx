@@ -50,11 +50,11 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
     setDropdownIsOpen(false);
   });
 
-  React.useEffect(() => {
+  React.useMemo(() => {
     setShownOptions(options);
   }, [options]);
 
-  React.useEffect(() => {
+  React.useMemo(() => {
     if (dropdownIsOpen) {
       setInputValue('');
     } else {

@@ -34,7 +34,7 @@ export default class CategoriesStore {
 
   findSelectedCategories(selectedIds: number[]) {
     return selectedIds.reduce((selectedOptions, selectedId) => {
-      const foundCategory = this._categories.find((category) => category.id === +selectedId);
+      const foundCategory = this.categories.find((category) => category.id === +selectedId);
 
       if (foundCategory) {
         selectedOptions.push(foundCategory);

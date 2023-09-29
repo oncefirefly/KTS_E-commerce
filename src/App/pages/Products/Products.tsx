@@ -11,7 +11,7 @@ import ProductsStore from '@store/ProductsStore';
 
 import { pageSize } from '@utils/constants/pageSize';
 import { categoriesToOptions } from '@utils/functions/categoriesToOptions';
-import { useSetSearchParams } from '@utils/hooks/useSetParams';
+import { paramsFromEntries } from '@utils/functions/paramsFromEntries';
 import { Option } from '@utils/types/MultiDropdownTypes';
 
 import { ProductsList, ProductsSearchInput, ProductsTitle } from './components';
@@ -19,11 +19,11 @@ import { ProductsList, ProductsSearchInput, ProductsTitle } from './components';
 import productsStyles from './Products.module.scss';
 
 export const Products: React.FC = observer(() => {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const [searchValue, setSearchValue] = React.useState<string>('');
-  const [selectedCategories, setSelectedCategories] = React.useState<Option[]>([]);
-  const [currentPage, setCurrentPage] = React.useState<number>(1);
+  const [searchParams, setSearchParams] = useSearchParams({
+    page: '1',
+    search: '',
+    categories: '',
+  });
 
   const productsStore = React.useMemo(() => {
     return new ProductsStore();
@@ -32,10 +32,6 @@ export const Products: React.FC = observer(() => {
   const categoriesStore = React.useMemo(() => {
     return new CategoriesStore();
   }, []);
-
-  useSetSearchParams('categories', selectedCategories, setSearchParams);
-  useSetSearchParams('search', searchValue, setSearchParams);
-  useSetSearchParams('page', currentPage.toString(), setSearchParams);
 
   React.useMemo(() => {
     const fetchProducts = async () => {
@@ -47,40 +43,43 @@ export const Products: React.FC = observer(() => {
         offset: (+searchParamsData.page - 1) * pageSize,
         limit: pageSize,
       });
-      await categoriesStore.fetchCategories();
 
-      if (searchParamsData.categories) {
-        const selectedCategoryIds = searchParamsData.categories.split('|').map((id) => +id);
-        const selectedCategoriesFromIds = categoriesStore.findSelectedCategories(selectedCategoryIds);
-        const categories = categoriesToOptions(selectedCategoriesFromIds);
-
-        setSelectedCategories(categories);
+      if (!categoriesStore.categories.length) {
+        await categoriesStore.fetchCategories();
       }
-
-      if (searchParamsData.page) setCurrentPage(+searchParamsData.page);
-
-      if (searchParamsData.search) setSearchValue(searchParamsData.search);
     };
 
     fetchProducts();
   }, [categoriesStore, productsStore, searchParams]);
 
   return (
-    <div className={classNames(productsStyles.product_content, 'content_wrapper')}>
+    <div className={classNames(productsStyles.products_content, 'content_wrapper')}>
       <ProductsTitle className={productsStyles.products_title} />
       <section className={productsStyles.products_search_controls}>
         <ProductsSearchInput
           className={productsStyles.products_search}
           onSearch={(value) => {
-            setSearchValue(value);
-            setCurrentPage(1);
+            setSearchParams((prevParams) => ({
+              ...paramsFromEntries(prevParams),
+              search: value,
+              page: '1',
+            }));
           }}
         />
         <MultiDropdown
-          value={selectedCategories}
+          value={categoriesToOptions(
+            categoriesStore.findSelectedCategories(
+              paramsFromEntries(searchParams)
+                .categories.split('|')
+                .map((categoryId) => +categoryId),
+            ),
+          )}
           onChange={(value: Option[]) => {
-            setSelectedCategories(value);
-            setCurrentPage(1);
+            setSearchParams((prevParams) => ({
+              ...paramsFromEntries(prevParams),
+              categories: value.map((option) => option.key).join('|'),
+              page: '1',
+            }));
           }}
           options={categoriesToOptions(categoriesStore.categories)}
           getTitle={(value: Option[]) => {
@@ -96,8 +95,13 @@ export const Products: React.FC = observer(() => {
         className={productsStyles.products_list}
         products={productsStore.products}
         totalProductsCount={productsStore.total}
-        currentPage={currentPage}
-        onPageChange={(page: number) => setCurrentPage(page)}
+        currentPage={+paramsFromEntries(searchParams).page}
+        onPageChange={(page: number) =>
+          setSearchParams((prevParams) => ({
+            ...paramsFromEntries(prevParams),
+            page: page.toString(),
+          }))
+        }
       />
     </div>
   );
