@@ -1,0 +1,11 @@
+@use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
+
+.categories_content {
+  margin-top: 100px;
+  @include flex(column, stretch, flex-start, $space-xl);
+}
+
+.categories_title {
+  @include flex(column, center, center, $space-m);
+}

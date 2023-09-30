@@ -1,5 +1,10 @@
 import { Option } from '@utils/types/MultiDropdownTypes';
 
+export type ProductCategoriesList = {
+  className?: string;
+  categories: ProductCategory[] | [];
+};
+
 export type ProductsListProps = {
   className?: string;
   products: OneProduct[] | [];
@@ -24,21 +29,13 @@ export type ProductsCountProps = {
 };
 
 export type ProductCardProps = {
-  /** Дополнительный classname */
   className?: string;
-  /** URL изображения */
   image: string;
-  /** Слот над заголовком */
   captionSlot?: React.ReactNode;
-  /** Заголовок карточки */
   title: React.ReactNode;
-  /** Описание карточки */
-  subtitle: React.ReactNode;
-  /** Содержимое карточки (футер/боковая часть), может быть пустым */
+  subtitle?: React.ReactNode;
   contentSlot?: React.ReactNode;
-  /** Слот для действия */
   actionSlot?: React.ReactNode;
-  /** Клик на карточку */
   onClick?: React.MouseEventHandler;
 };
 
