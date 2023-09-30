@@ -5,6 +5,7 @@ export { Input } from './Input/Input';
 export { LoadingSpinner } from './LoadingSpinner/LoadingSpinner';
 export { MultiDropdown } from './MultiDropdown/MultiDropdown';
 export { NavBar } from './NavBar/NavBar';
+export { PageTitle } from './PageTitle/PageTitle';
 export { Pagination } from './Pagination/Pagnation';
 export { PopupWrapper } from './PopupWrapper/PopupWrapper';
 export { ProductCard } from './ProductCard/ProductCard';
