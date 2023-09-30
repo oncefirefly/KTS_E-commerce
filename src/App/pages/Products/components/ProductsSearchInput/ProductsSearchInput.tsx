@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import { Button, Input, Text } from '@components/index';
 
+import { paramsFromEntries } from '@utils/functions/paramsFromEntries';
 import { ProductsSearchInputProps } from '@utils/types/ProductTypes';
 
 export const ProductsSearchInput: React.FC<ProductsSearchInputProps> = ({ className, onSearch }) => {
@@ -13,8 +14,8 @@ export const ProductsSearchInput: React.FC<ProductsSearchInputProps> = ({ classN
     setSearchValue(value);
   };
 
-  React.useEffect(() => {
-    const searchParamsData = Object.fromEntries(searchParams.entries());
+  React.useMemo(() => {
+    const searchParamsData = paramsFromEntries(searchParams);
 
     if (searchParamsData.search) setSearchValue(searchParamsData.search);
   }, [searchParams]);
