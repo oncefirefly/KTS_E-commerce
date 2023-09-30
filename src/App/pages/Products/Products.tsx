@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { MultiDropdown, LoadingSpinner, PopupWrapper } from '@components/index';
+import { MultiDropdown, LoadingSpinner, PopupWrapper, PageTitle } from '@components/index';
 
 import CategoriesStore from '@store/CategoriesStore';
 import ProductsStore from '@store/ProductsStore';
@@ -14,7 +14,7 @@ import { categoriesToOptions } from '@utils/functions/categoriesToOptions';
 import { paramsFromEntries } from '@utils/functions/paramsFromEntries';
 import { Option } from '@utils/types/MultiDropdownTypes';
 
-import { ProductsList, ProductsSearchInput, ProductsTitle } from './components';
+import { ProductsList, ProductsSearchInput } from './components';
 
 import productsStyles from './Products.module.scss';
 
@@ -67,7 +67,12 @@ export const Products: React.FC = observer(() => {
 
   return (
     <div className={classNames(productsStyles.products_content, 'content_wrapper')}>
-      <ProductsTitle className={productsStyles.products_title} />
+      <PageTitle
+        className={productsStyles.products_title}
+        title="Products"
+        subTitle="We&nbsp;display products based on&nbsp;the latest products we&nbsp;have, if&nbsp;you want to&nbsp;see our old
+          products please enter the name of&nbsp;the item"
+      />
       <section className={productsStyles.products_search_controls}>
         <ProductsSearchInput
           className={productsStyles.products_search}
