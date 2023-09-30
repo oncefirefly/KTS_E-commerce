@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { MultiDropdown } from '@components/index';
+import { MultiDropdown, LoadingSpinner, PopupWrapper } from '@components/index';
 
 import CategoriesStore from '@store/CategoriesStore';
 import ProductsStore from '@store/ProductsStore';
@@ -19,6 +19,8 @@ import { ProductsList, ProductsSearchInput, ProductsTitle } from './components';
 import productsStyles from './Products.module.scss';
 
 export const Products: React.FC = observer(() => {
+  const [loading, setIsLoading] = React.useState(false);
+
   const [searchParams, setSearchParams] = useSearchParams({
     page: '1',
     search: '',
@@ -33,9 +35,18 @@ export const Products: React.FC = observer(() => {
     return new CategoriesStore();
   }, []);
 
+  React.useEffect(() => {
+    if (loading) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [loading]);
+
   React.useMemo(() => {
     const fetchProducts = async () => {
-      const searchParamsData = Object.fromEntries(searchParams.entries());
+      const searchParamsData = paramsFromEntries(searchParams);
+      setIsLoading(true);
 
       await productsStore.fetchProducts({
         categoryIds: searchParamsData.categories || '',
@@ -47,13 +58,17 @@ export const Products: React.FC = observer(() => {
       if (!categoriesStore.categories.length) {
         await categoriesStore.fetchCategories();
       }
+
+      setIsLoading(false);
     };
 
     fetchProducts();
   }, [categoriesStore, productsStore, searchParams]);
 
   return (
-    <div className={classNames(productsStyles.products_content, 'content_wrapper')}>
+    <div
+      className={classNames(productsStyles.products_content, 'content_wrapper', { [productsStyles.loading]: loading })}
+    >
       <ProductsTitle className={productsStyles.products_title} />
       <section className={productsStyles.products_search_controls}>
         <ProductsSearchInput
@@ -103,6 +118,11 @@ export const Products: React.FC = observer(() => {
           }))
         }
       />
+      {loading && (
+        <PopupWrapper>
+          <LoadingSpinner />
+        </PopupWrapper>
+      )}
     </div>
   );
 });
