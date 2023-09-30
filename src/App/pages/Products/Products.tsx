@@ -66,9 +66,7 @@ export const Products: React.FC = observer(() => {
   }, [categoriesStore, productsStore, searchParams]);
 
   return (
-    <div
-      className={classNames(productsStyles.products_content, 'content_wrapper', { [productsStyles.loading]: loading })}
-    >
+    <div className={classNames(productsStyles.products_content, 'content_wrapper')}>
       <ProductsTitle className={productsStyles.products_title} />
       <section className={productsStyles.products_search_controls}>
         <ProductsSearchInput
