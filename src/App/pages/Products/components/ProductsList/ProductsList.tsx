@@ -23,16 +23,16 @@ export const ProductsList: React.FC<ProductsListProps> = observer(
       <section className={className || ''}>
         <ProductsCount className={productsListStyles.products_count} count={totalProductsCount} />
         <div className={productsListStyles.products_list_container}>
-          {products.map((product) => (
+          {products.map(({ id, images, category, title, description, price }) => (
             <ProductCard
-              key={product.id}
-              image={product.images[0]}
-              captionSlot={product.category}
-              title={product.title}
-              subtitle={product.description}
-              contentSlot={product.price}
+              key={id}
+              image={images[0]}
+              captionSlot={category}
+              title={title}
+              subtitle={description}
+              contentSlot={price}
               actionSlot={<Button>Add to Cart</Button>}
-              onClick={() => handleProductClick(product.id)}
+              onClick={() => handleProductClick(id)}
             />
           ))}
         </div>
