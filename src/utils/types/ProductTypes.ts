@@ -1,9 +1,5 @@
 import { Option } from '@utils/types/MultiDropdownTypes';
 
-export type ProductTitleProps = {
-  className?: string;
-};
-
 export type ProductsListProps = {
   className?: string;
   products: OneProduct[] | [];
