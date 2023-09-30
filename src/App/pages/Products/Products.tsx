@@ -35,6 +35,8 @@ export const Products: React.FC = observer(() => {
     return new CategoriesStore();
   }, []);
 
+  const categoriesLength = categoriesStore.categories.length;
+
   React.useEffect(() => {
     if (loading) {
       document.body.style.overflow = 'hidden';
@@ -55,7 +57,7 @@ export const Products: React.FC = observer(() => {
         limit: pageSize,
       });
 
-      if (!categoriesStore.categories.length) {
+      if (!categoriesLength) {
         await categoriesStore.fetchCategories();
       }
 
@@ -63,7 +65,7 @@ export const Products: React.FC = observer(() => {
     };
 
     fetchProducts();
-  }, [categoriesStore, productsStore, searchParams]);
+  }, [categoriesLength, categoriesStore, productsStore, searchParams]);
 
   return (
     <div className={classNames(productsStyles.products_content, 'content_wrapper')}>
