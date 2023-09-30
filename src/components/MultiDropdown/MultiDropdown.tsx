@@ -69,6 +69,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
       {...props}
     >
       <Input
+        className={dropdownStyles.dropdown_input}
         value={inputValue}
         placeholder={getTitle(value)}
         onChange={handleInputChange}
@@ -76,11 +77,22 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
           setInputValue('');
           setDropdownIsOpen(true);
         }}
-        afterSlot={<ArrowDownIcon color="secondary" />}
+        afterSlot={
+          <ArrowDownIcon
+            className={classNames(dropdownStyles.dropdown_arrow, {
+              [dropdownStyles.dropdown_arrow_rotate]: dropdownIsOpen,
+            })}
+            color="secondary"
+          />
+        }
         disabled={disabled}
       />
-      {dropdownIsOpen && !disabled && (
-        <ul className={dropdownStyles.dropdown}>
+      {!disabled && (
+        <ul
+          className={classNames(dropdownStyles.dropdown, {
+            [dropdownStyles.dropdown_shown]: dropdownIsOpen,
+          })}
+        >
           {!disabled &&
             shownOptions.map((option) => (
               <li
