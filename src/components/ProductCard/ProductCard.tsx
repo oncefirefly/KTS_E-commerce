@@ -39,9 +39,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <Text view="p-20" maxLines={1} weight="bold" color="primary" data-testid="text">
             {title}
           </Text>
-          <Text view="p-16" maxLines={1} color="secondary" data-testid="text">
-            {subtitle}
-          </Text>
+          {subtitle && (
+            <Text view="p-16" maxLines={1} color="secondary" data-testid="text">
+              {subtitle}
+            </Text>
+          )}
         </div>
         <div className={cardStyles.card_footer}>
           {contentSlot && (
