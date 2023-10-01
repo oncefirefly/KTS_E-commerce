@@ -9,6 +9,8 @@
   flex-wrap: nowrap;
   flex-shrink: 0;
 
+  transition: border ease-in-out 0.3s;
+
   border-radius: $border-radius;
   border: 1px solid $input-border;
   background: $input-bg;
