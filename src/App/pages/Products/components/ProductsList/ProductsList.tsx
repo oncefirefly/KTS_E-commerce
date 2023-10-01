@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Button, ProductCard, Pagination } from '@components/index';
+import { Button, ProductCard, Pagination, Text } from '@components/index';
 
 import { pageSize } from '@utils/constants/pageSize';
 import { ProductsListProps } from '@utils/types/ProductTypes';
@@ -31,7 +31,11 @@ export const ProductsList: React.FC<ProductsListProps> = observer(
               title={title}
               subtitle={description}
               contentSlot={price}
-              actionSlot={<Button>Add to Cart</Button>}
+              actionSlot={
+                <Button>
+                  <Text view="p-18">Add to Cart</Text>
+                </Button>
+              }
               onClick={() => handleProductClick(id)}
             />
           ))}
