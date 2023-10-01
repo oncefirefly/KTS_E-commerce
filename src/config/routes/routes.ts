@@ -9,8 +9,4 @@ export const headerRoutes: NavLink[] = [
     path: '/categories',
     name: 'Categories',
   },
-  {
-    path: '/about_us',
-    name: 'About Us',
-  },
 ];

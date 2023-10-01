@@ -5,7 +5,7 @@ import { Header } from '@components/index';
 
 import { LoginData } from '@utils/types/LoginTypes';
 
-import { AboutUs, Cart, Categories, Login, Product, Products } from './pages/';
+import { Cart, Categories, Login, Product, Products } from './pages/';
 
 const App: React.FC = () => {
   const [loginState, setLoginState] = React.useState<LoginData>({
@@ -22,7 +22,6 @@ const App: React.FC = () => {
           <Route path="/" element={<Products />} />
           <Route path="/product/:productId" element={<Product />} />
           <Route path="/categories" element={<Categories />} />
-          <Route path="/about_us" element={<AboutUs />} />
           <Route path="/cart" element={<Cart />} />
           <Route
             path="/login"
