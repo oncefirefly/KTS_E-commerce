@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import { LoadingSpinner, PageTitle, PopupWrapper } from '@components/index';
 
-import CategoriesStore from '@store/CategoriesStore';
+import categoriesStore from '@store/instance';
 
 import { CategoriesList } from './components/CategoriesList/CategoriesList';
 
@@ -12,10 +12,6 @@ import categoriesStyles from './Categories.module.scss';
 
 export const Categories: React.FC = observer(() => {
   const [loading, setIsLoading] = React.useState(false);
-
-  const categoriesStore = React.useMemo(() => {
-    return new CategoriesStore();
-  }, []);
 
   const categoriesLength = categoriesStore.categories.length;
 
@@ -29,7 +25,7 @@ export const Categories: React.FC = observer(() => {
     if (!categoriesLength) {
       fetchCategories();
     }
-  }, [categoriesLength, categoriesStore]);
+  }, [categoriesLength]);
 
   return (
     <div className={classNames(categoriesStyles.categories_content, 'content_wrapper')}>

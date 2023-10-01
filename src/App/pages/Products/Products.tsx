@@ -6,8 +6,8 @@ import { useSearchParams } from 'react-router-dom';
 
 import { MultiDropdown, LoadingSpinner, PopupWrapper, PageTitle } from '@components/index';
 
-import CategoriesStore from '@store/CategoriesStore';
 import ProductsStore from '@store/ProductsStore';
+import categoriesStore from '@store/instance';
 
 import { pageSize } from '@utils/constants/pageSize';
 import { categoriesToOptions } from '@utils/functions/categoriesToOptions';
@@ -30,10 +30,6 @@ export const Products: React.FC = observer(() => {
 
   const productsStore = React.useMemo(() => {
     return new ProductsStore();
-  }, []);
-
-  const categoriesStore = React.useMemo(() => {
-    return new CategoriesStore();
   }, []);
 
   const categoriesLength = categoriesStore.categories.length;
@@ -60,7 +56,7 @@ export const Products: React.FC = observer(() => {
     };
 
     fetchProducts();
-  }, [categoriesLength, categoriesStore, productsStore, searchParams]);
+  }, [categoriesLength, productsStore, searchParams]);
 
   return (
     <div className={classNames(productsStyles.products_content, 'content_wrapper')}>
