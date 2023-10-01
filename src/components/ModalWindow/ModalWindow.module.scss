@@ -1,0 +1,16 @@
+@use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
+
+.modal {
+  box-sizing: border-box;
+  background-color: $brand-white;
+  padding: 20px;
+  border: 1px solid $brand;
+  max-width: 500px;
+  min-width: 200px;
+  @include flex(column, center, center, $space-xs);
+
+  .modal_controls {
+    @include flex(row, center, center, $space-xs);
+  }
+}
