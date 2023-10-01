@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { ArrowLeftIcon } from '@components/icons/index';
-import { Button, ProductCard, Text } from '@components/index';
+import { Button, Text } from '@components/index';
 
 import { getProductById } from '@config/services/products';
 
@@ -65,8 +65,8 @@ export const Product: React.FC = () => {
           </div>
         </section>
       )}
-      {/* TODO: Related Items component */}
-      <section className={productStyles.product_related}>
+      {/* TODO: Related Items component 
+       <section className={productStyles.product_related}>
         <Text tag="h3" view="subtitle">
           Related Items
         </Text>
@@ -77,7 +77,7 @@ export const Product: React.FC = () => {
           contentSlot="123"
           actionSlot={<Button>Add to Cart</Button>}
         />
-      </section>
+      </section> */}
     </div>
   );
 };
