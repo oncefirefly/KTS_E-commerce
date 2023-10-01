@@ -6,6 +6,7 @@ import { InputProps } from '@utils/types/InputTypes';
 import inputStyles from './Input.module.scss';
 
 export const Input: React.FC<InputProps> = ({
+  id,
   value,
   defaultValue,
   onChange,
@@ -19,7 +20,7 @@ export const Input: React.FC<InputProps> = ({
 
   return (
     <label
-      htmlFor="customInput"
+      htmlFor={id}
       className={classNames(inputStyles.input_label, {
         [`${className}`]: className,
         [inputStyles.focused]: isFocused,
@@ -27,7 +28,7 @@ export const Input: React.FC<InputProps> = ({
       })}
     >
       <input
-        id="customInput"
+        id={id}
         type="text"
         value={value}
         defaultValue={defaultValue}
