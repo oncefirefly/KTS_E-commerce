@@ -3,6 +3,7 @@ export { CustomLink } from './CustomLink/CustomLink';
 export { Header } from './Header/Header';
 export { Input } from './Input/Input';
 export { LoadingSpinner } from './LoadingSpinner/LoadingSpinner';
+export { ModalWindow } from './ModalWindow/ModalWindow';
 export { MultiDropdown } from './MultiDropdown/MultiDropdown';
 export { NavBar } from './NavBar/NavBar';
 export { PageTitle } from './PageTitle/PageTitle';
