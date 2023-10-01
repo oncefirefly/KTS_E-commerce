@@ -46,7 +46,7 @@ export const Product: React.FC = observer(() => {
 
       await productsStore.fetchProducts({
         categoryIds: categoryId.toString(),
-        offset: Math.floor(Math.random() * 3),
+        offset: Math.floor(Math.random() * 5),
         limit: 3,
       });
     };
@@ -77,9 +77,6 @@ export const Product: React.FC = observer(() => {
             <div className={productStyles.product_secondary}>
               <Text view="title">${product.price}</Text>
               <div className={productStyles.product_controls}>
-                <Button>
-                  <Text view="button">Buy now</Text>
-                </Button>
                 <Button color="secondary">
                   <Text view="button">Add to Cart</Text>
                 </Button>
