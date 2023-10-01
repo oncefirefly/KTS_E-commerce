@@ -12,6 +12,7 @@ import ProductsStore from '@store/ProductsStore';
 import { pageSize } from '@utils/constants/pageSize';
 import { categoriesToOptions } from '@utils/functions/categoriesToOptions';
 import { paramsFromEntries } from '@utils/functions/paramsFromEntries';
+import { useOverflow } from '@utils/hooks/useOverflow';
 import { Option } from '@utils/types/MultiDropdownTypes';
 
 import { ProductsList, ProductsSearchInput } from './components';
@@ -37,13 +38,7 @@ export const Products: React.FC = observer(() => {
 
   const categoriesLength = categoriesStore.categories.length;
 
-  React.useEffect(() => {
-    if (loading) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [loading]);
+  useOverflow(loading);
 
   React.useMemo(() => {
     const fetchProducts = async () => {
