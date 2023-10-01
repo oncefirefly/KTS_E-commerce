@@ -36,6 +36,7 @@ export const Input: React.FC<InputProps> = ({
         disabled={disabled}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
+        autoComplete="off"
         {...props}
       />
       {afterSlot}
