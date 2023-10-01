@@ -10,6 +10,7 @@ import { MultiDropdownProps, Option } from '@utils/types/MultiDropdownTypes';
 import dropdownStyles from './MultiDropdown.module.scss';
 
 export const MultiDropdown: React.FC<MultiDropdownProps> = ({
+  id,
   className,
   options,
   value,
@@ -69,6 +70,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
       {...props}
     >
       <Input
+        id={id}
         className={dropdownStyles.dropdown_input}
         value={inputValue}
         placeholder={getTitle(value)}
