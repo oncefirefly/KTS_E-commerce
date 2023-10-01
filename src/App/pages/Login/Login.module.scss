@@ -13,9 +13,13 @@
     width: 500px;
     @include flex(column, center, center, $space-m);
 
-    .input_wrapper {
+    .login_input_wrapper {
       width: 100%;
       @include flex(column, flex-start, flex-start, $space-xxs);
+    }
+
+    .login_submit {
+      width: 100%;
     }
   }
 }

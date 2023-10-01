@@ -42,8 +42,10 @@ export const Login: React.FC<LoginPageProps> = ({ onLogin }) => {
         Login
       </Text>
       <form autoComplete="false">
-        <div className={loginStyles.input_wrapper}>
-          <Text>Login</Text>
+        <div className={loginStyles.login_input_wrapper}>
+          <Text view="p-18" weight="medium">
+            Login
+          </Text>
           <Input
             id="loginEmail"
             value={loginData.email}
@@ -55,10 +57,12 @@ export const Login: React.FC<LoginPageProps> = ({ onLogin }) => {
             }
           />
         </div>
-        <div className={loginStyles.input_wrapper}>
-          <Text>Password</Text>
+        <div className={loginStyles.login_input_wrapper}>
+          <Text view="p-18" weight="medium">
+            Password
+          </Text>
           <Input
-            id="loginPasswrod"
+            id="loginPassword"
             value={loginData.password}
             type="password"
             onChange={(value) =>
@@ -69,7 +73,7 @@ export const Login: React.FC<LoginPageProps> = ({ onLogin }) => {
             }
           />
         </div>
-        <Button onClick={handleLogin}>
+        <Button onClick={handleLogin} className={loginStyles.login_submit}>
           <Text view="p-18" weight="bold">
             LOGIN
           </Text>
