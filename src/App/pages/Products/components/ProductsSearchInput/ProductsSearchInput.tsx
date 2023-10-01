@@ -22,7 +22,7 @@ export const ProductsSearchInput: React.FC<ProductsSearchInputProps> = ({ classN
 
   return (
     <div className={className || ''}>
-      <Input value={searchValue} onChange={handleInputChange} placeholder="Search product" />
+      <Input id="search" value={searchValue} onChange={handleInputChange} placeholder="Search product" />
       <Button onClick={() => onSearch(searchValue)}>
         <Text view="button">Find now</Text>
       </Button>

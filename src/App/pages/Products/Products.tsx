@@ -87,6 +87,7 @@ export const Products: React.FC = observer(() => {
           }}
         />
         <MultiDropdown
+          id="productsFilter"
           value={categoriesToOptions(
             categoriesStore.findSelectedCategories(
               paramsFromEntries(searchParams)
