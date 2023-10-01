@@ -12,6 +12,7 @@ export default class CategoriesStore {
       _categories: observable,
       fetchCategories: action.bound,
       findSelectedCategories: action.bound,
+      findCategoryIdByName: action.bound,
       categories: computed,
     });
   }
@@ -30,6 +31,10 @@ export default class CategoriesStore {
     runInAction(() => {
       this._categories = categoriesData;
     });
+  }
+
+  findCategoryIdByName(categoryName: string) {
+    return this._categories.find((category) => category.name === categoryName)?.id || 0;
   }
 
   findSelectedCategories(selectedIds: number[]) {

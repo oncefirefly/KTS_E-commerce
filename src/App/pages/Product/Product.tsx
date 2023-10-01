@@ -1,35 +1,58 @@
 import classNames from 'classnames';
 
+import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { ArrowLeftIcon } from '@components/icons/index';
-import { Button, Text } from '@components/index';
+import { Button, Text, ProductCard } from '@components/index';
 
 import { getProductById } from '@config/services/products';
+
+import ProductsStore from '@store/ProductsStore';
+import categoriesStore from '@store/instance';
 
 import { OneProduct } from '@utils/types/ProductTypes';
 
 import productStyles from './Product.module.scss';
 
-export const Product: React.FC = () => {
+export const Product: React.FC = observer(() => {
   const { productId } = useParams();
 
   const navigate = useNavigate();
 
+  const categoriesLength = categoriesStore.categories.length;
+  const productsStore = React.useMemo(() => {
+    return new ProductsStore();
+  }, []);
+
   const [product, setProduct] = React.useState<OneProduct | null>(null);
 
-  const fetchProductById = async (id: string) => {
-    const fetchedProduct = await getProductById(id);
-
-    setProduct(fetchedProduct);
+  const handleProductClick = (productId: number) => {
+    navigate(`/product/${productId}`);
   };
 
-  React.useEffect(() => {
-    if (productId) fetchProductById(productId);
-  }, [productId]);
+  React.useMemo(() => {
+    const fetchProductById = async (id: string) => {
+      const fetchedProduct = await getProductById(id);
 
-  // `${productStyles.product_content} content_wrapper`
+      setProduct(fetchedProduct);
+
+      if (!categoriesLength) {
+        await categoriesStore.fetchCategories();
+      }
+
+      const categoryId = categoriesStore.findCategoryIdByName(fetchedProduct.category);
+
+      await productsStore.fetchProducts({
+        categoryIds: categoryId.toString(),
+        offset: Math.floor(Math.random() * 3),
+        limit: 3,
+      });
+    };
+
+    if (productId) fetchProductById(productId);
+  }, [categoriesLength, productId, productsStore]);
 
   return (
     <div className={classNames(productStyles.product_content, 'content_wrapper')}>
@@ -65,19 +88,24 @@ export const Product: React.FC = () => {
           </div>
         </section>
       )}
-      {/* TODO: Related Items component 
-       <section className={productStyles.product_related}>
+      <section className={productStyles.product_related}>
         <Text tag="h3" view="subtitle">
           Related Items
         </Text>
-        <ProductCard
-          image="https://www.ikea.com/sg/en/images/products/kivik-3-seat-sofa-grann-bomstad-black__0137863_pe296632_s5.jpg?f=s"
-          title="KIVIK"
-          subtitle="Cuddle up in the comfortable KIVIK sofa. The generous size, low armrests and pocket springs with foam that adapts to the body invites you and your guests to many hours of socialising and relaxation."
-          contentSlot="123"
-          actionSlot={<Button>Add to Cart</Button>}
-        />
-      </section> */}
+        <div className={productStyles.product_related_list}>
+          {productsStore.products.map(({ id, images, category, title, description, price }) => (
+            <ProductCard
+              key={id}
+              image={images[0]}
+              captionSlot={category}
+              title={title}
+              subtitle={description}
+              contentSlot={price}
+              onClick={() => handleProductClick(id)}
+            />
+          ))}
+        </div>
+      </section>
     </div>
   );
-};
+});

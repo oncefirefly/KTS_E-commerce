@@ -46,3 +46,11 @@
 .product_related {
   @include flex(column, stretch, flex-start, $space-l);
 }
+
+.product_related_list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(360px, 360px));
+  justify-content: space-between;
+  justify-items: stretch;
+  row-gap: 30px;
+}
