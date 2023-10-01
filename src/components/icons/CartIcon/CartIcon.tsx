@@ -2,9 +2,11 @@ import * as React from 'react';
 
 import { IconWrapper } from '@components/icons/index';
 
-export const CartIcon: React.FC = () => {
+import { CartIconProps } from '@utils/types/CartTypes';
+
+export const CartIcon: React.FC<CartIconProps> = ({ onClick }) => {
   return (
-    <IconWrapper width="30" height="30" viewBox="0 0 30 30" fill="none" cursor="pointer">
+    <IconWrapper onClick={onClick} width="30" height="30" viewBox="0 0 30 30" fill="none" cursor="pointer">
       <path
         d="M9.375 9.58751V8.37501C9.375 5.56251 11.6375 2.80001 14.45 2.53751C17.8 2.21251 20.625 4.85001 20.625 8.13751V9.86251"
         stroke="#151411"
