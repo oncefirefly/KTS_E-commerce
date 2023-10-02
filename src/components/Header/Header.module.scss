@@ -21,3 +21,10 @@
 .header_profile {
   @include flex(row, center, flex-start, $space-m);
 }
+
+.header_logout {
+  background: transparent;
+  border: none;
+  width: fit-content;
+  height: fit-content;
+}

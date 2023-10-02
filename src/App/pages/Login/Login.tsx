@@ -1,17 +1,14 @@
 import classNames from 'classnames';
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Input, Text } from '@components/index';
 
-import { LoginPageProps } from '@utils/types/LoginTypes';
-
-import { auth } from '../../../firebase';
+import { userDataStore } from '@store/instance';
 
 import loginStyles from './Login.module.scss';
 
-export const Login: React.FC<LoginPageProps> = ({ onLogin }) => {
+export const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const [loginData, setLoginData] = React.useState({
@@ -22,16 +19,7 @@ export const Login: React.FC<LoginPageProps> = ({ onLogin }) => {
   const handleLogin = async () => {
     const { email, password } = loginData;
 
-    await signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-
-        onLogin({ email: user.email!, uid: user.uid });
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        throw new Error(errorMessage);
-      });
+    await userDataStore.login(email, password);
 
     navigate('/');
   };
@@ -49,6 +37,7 @@ export const Login: React.FC<LoginPageProps> = ({ onLogin }) => {
           <Input
             id="loginEmail"
             value={loginData.email}
+            type="email"
             onChange={(value) =>
               setLoginData((prevLoginData) => ({
                 ...prevLoginData,
