@@ -1,0 +1,19 @@
+@use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
+
+.cart_list {
+  @include flex(column, flex-start, flex-start, $space-xs);
+}
+
+.cart_header {
+  padding: $space-s;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 6fr 3fr 3fr;
+}
+
+.cart_header_product,
+.cart_header_quantity,
+.cart_header_price {
+  justify-self: center;
+}

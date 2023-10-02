@@ -10,7 +10,7 @@ import { Button, Text, ProductCard } from '@components/index';
 import { getProductById } from '@config/services/products';
 
 import ProductsStore from '@store/ProductsStore';
-import { categoriesStore } from '@store/instance';
+import { categoriesStore, cartStore } from '@store/instance';
 
 import { OneProduct } from '@utils/types/ProductTypes';
 
@@ -77,7 +77,13 @@ export const Product: React.FC = observer(() => {
             <div className={productStyles.product_secondary}>
               <Text view="title">${product.price}</Text>
               <div className={productStyles.product_controls}>
-                <Button color="secondary">
+                <Button
+                  color="secondary"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    cartStore.addToCart(product);
+                  }}
+                >
                   <Text view="button">Add to Cart</Text>
                 </Button>
               </div>

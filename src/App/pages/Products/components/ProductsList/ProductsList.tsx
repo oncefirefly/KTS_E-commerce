@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button, ProductCard, Pagination, Text } from '@components/index';
 
+import { cartStore } from '@store/instance';
+
 import { pageSize } from '@utils/constants/pageSize';
 import { ProductsListProps } from '@utils/types/ProductTypes';
 
@@ -23,7 +25,7 @@ export const ProductsList: React.FC<ProductsListProps> = observer(
       <section className={className || ''}>
         <ProductsCount className={productsListStyles.products_count} count={totalProductsCount} />
         <div className={productsListStyles.products_list_container}>
-          {products.map(({ id, images, category, title, description, price }) => (
+          {products.map(({ id, images, category, title, subtitle, description, price }) => (
             <ProductCard
               key={id}
               image={images[0]}
@@ -32,7 +34,12 @@ export const ProductsList: React.FC<ProductsListProps> = observer(
               subtitle={description}
               contentSlot={price}
               actionSlot={
-                <Button>
+                <Button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    cartStore.addToCart({ id, images, category, subtitle, title, description, price });
+                  }}
+                >
                   <Text view="p-18">Add to Cart</Text>
                 </Button>
               }
