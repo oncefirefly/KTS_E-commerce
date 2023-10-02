@@ -7,7 +7,7 @@ import { useSearchParams } from 'react-router-dom';
 import { MultiDropdown, LoadingSpinner, PopupWrapper, PageTitle } from '@components/index';
 
 import ProductsStore from '@store/ProductsStore';
-import categoriesStore from '@store/instance';
+import { categoriesStore } from '@store/instance';
 
 import { pageSize } from '@utils/constants/pageSize';
 import { categoriesToOptions } from '@utils/functions/categoriesToOptions';

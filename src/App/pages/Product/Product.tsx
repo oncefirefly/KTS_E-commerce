@@ -10,7 +10,7 @@ import { Button, Text, ProductCard } from '@components/index';
 import { getProductById } from '@config/services/products';
 
 import ProductsStore from '@store/ProductsStore';
-import categoriesStore from '@store/instance';
+import { categoriesStore } from '@store/instance';
 
 import { OneProduct } from '@utils/types/ProductTypes';
 

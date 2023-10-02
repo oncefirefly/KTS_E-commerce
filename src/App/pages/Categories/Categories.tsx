@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import { LoadingSpinner, PageTitle, PopupWrapper } from '@components/index';
 
-import categoriesStore from '@store/instance';
+import { categoriesStore } from '@store/instance';
 
 import { CategoriesList } from './components/CategoriesList/CategoriesList';
 
