@@ -1,5 +1,5 @@
 import CategoriesStore from './CategoriesStore';
+import UserDataStore from './UserDataStore';
 
-const categoriesStore = new CategoriesStore();
-
-export default categoriesStore;
+export const categoriesStore = new CategoriesStore();
+export const userDataStore = new UserDataStore();
