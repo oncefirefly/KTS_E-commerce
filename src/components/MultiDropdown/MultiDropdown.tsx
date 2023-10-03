@@ -1,15 +1,16 @@
+import classNames from 'classnames';
 import * as React from 'react';
 
-import { Input } from 'components/';
-import { ArrowDownIcon } from 'components/icons/';
+import { ArrowDownIcon } from '@components/icons/index';
+import { Input } from '@components/index';
 
-import { useClickOutside } from 'utils/hooks/useClickOutside';
-
-import { MultiDropdownProps, Option } from 'utils/types/MultiDropdownTypes';
+import { useClickOutside } from '@utils/hooks/useClickOutside';
+import { MultiDropdownProps, Option } from '@utils/types/MultiDropdownTypes';
 
 import dropdownStyles from './MultiDropdown.module.scss';
 
 export const MultiDropdown: React.FC<MultiDropdownProps> = ({
+  id,
   className,
   options,
   value,
@@ -50,11 +51,11 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
     setDropdownIsOpen(false);
   });
 
-  React.useEffect(() => {
+  React.useMemo(() => {
     setShownOptions(options);
   }, [options]);
 
-  React.useEffect(() => {
+  React.useMemo(() => {
     if (dropdownIsOpen) {
       setInputValue('');
     } else {
@@ -64,11 +65,13 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
 
   return (
     <div
-      className={`${dropdownStyles.dropdown_container} ${className ? ` ${className}` : ''}`}
+      className={classNames(dropdownStyles.dropdown_container, { [`${className}`]: className })}
       ref={dropdownRef}
       {...props}
     >
       <Input
+        id={id}
+        className={dropdownStyles.dropdown_input}
         value={inputValue}
         placeholder={getTitle(value)}
         onChange={handleInputChange}
@@ -76,15 +79,26 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
           setInputValue('');
           setDropdownIsOpen(true);
         }}
-        afterSlot={<ArrowDownIcon color="secondary" />}
+        afterSlot={
+          <ArrowDownIcon
+            className={classNames(dropdownStyles.dropdown_arrow, {
+              [dropdownStyles.dropdown_arrow_rotate]: dropdownIsOpen,
+            })}
+            color="secondary"
+          />
+        }
         disabled={disabled}
       />
-      {dropdownIsOpen && !disabled && (
-        <ul className={dropdownStyles.dropdown}>
+      {!disabled && (
+        <ul
+          className={classNames(dropdownStyles.dropdown, {
+            [dropdownStyles.dropdown_shown]: dropdownIsOpen,
+          })}
+        >
           {!disabled &&
             shownOptions.map((option) => (
               <li
-                className={`${optionIsSelected(option) ? dropdownStyles.selected : ''}`}
+                className={classNames({ [dropdownStyles.selected]: optionIsSelected(option) })}
                 key={option.key}
                 onClick={() => handleOptionClick(option)}
               >

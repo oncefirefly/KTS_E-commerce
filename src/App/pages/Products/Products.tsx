@@ -1,85 +1,125 @@
+import classNames from 'classnames';
+
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import ProductsStore from 'store/ProductsStore';
+import { MultiDropdown, LoadingSpinner, PopupWrapper, PageTitle } from '@components/index';
 
-import { Option } from 'utils/types/MultiDropdownTypes';
+import ProductsStore from '@store/ProductsStore';
+import { categoriesStore } from '@store/instance';
 
-import { ProductsList, ProductsMultiDropdown, ProductsSearchInput, ProductsTitle } from './components';
+import { pageSize } from '@utils/constants/pageSize';
+import { categoriesToOptions } from '@utils/functions/categoriesToOptions';
+import { paramsFromEntries } from '@utils/functions/paramsFromEntries';
+import { useOverflow } from '@utils/hooks/useOverflow';
+import { Option } from '@utils/types/MultiDropdownTypes';
+
+import { ProductsList, ProductsSearchInput } from './components';
 
 import productsStyles from './Products.module.scss';
 
 export const Products: React.FC = observer(() => {
-  const pageFromLocalStorage = localStorage.getItem('eCommerceProductsPage');
-  const searchValueFromLocalStorage = localStorage.getItem('eCommerceProductsSearch');
-  const categoriesFromLocalStorage = JSON.parse(localStorage.getItem('eCommerceProductsCategories') as string);
+  const [loading, setIsLoading] = React.useState(false);
 
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const [searchValue, setSearchValue] = React.useState<string>(searchValueFromLocalStorage || '');
-  const [selectedCategories, setSelectedCategories] = React.useState<Option[]>(categoriesFromLocalStorage || []);
-  const [currentPage, setCurrentPage] = React.useState<number>(pageFromLocalStorage ? +pageFromLocalStorage : 1);
+  const [searchParams, setSearchParams] = useSearchParams({
+    page: '1',
+    search: '',
+    categories: '',
+  });
 
   const productsStore = React.useMemo(() => {
     return new ProductsStore();
   }, []);
 
-  // setup products (including categories filter and search)
+  const categoriesLength = categoriesStore.categories.length;
+
+  useOverflow(loading);
+
   React.useMemo(() => {
-    const setupProducts = async () => {
-      const selectedOptions = selectedCategories.map((option) => option.key).join('|');
+    const fetchProducts = async () => {
+      const searchParamsData = paramsFromEntries(searchParams);
+      setIsLoading(true);
 
-      await productsStore.fetchProducts(selectedOptions);
+      await productsStore.fetchProducts({
+        categoryIds: searchParamsData.categories || '',
+        searchValue: searchParamsData.search,
+        offset: (+searchParamsData.page - 1) * pageSize,
+        limit: pageSize,
+      });
 
-      if (searchValue.length) {
-        productsStore.filterProductsOnSearch(searchValue);
+      if (!categoriesLength) {
+        await categoriesStore.fetchCategories();
       }
+
+      setIsLoading(false);
     };
 
-    setupProducts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [productsStore, selectedCategories]);
+    fetchProducts();
+  }, [categoriesLength, productsStore, searchParams]);
 
-  // updating states on searchParams change
-  React.useMemo(() => {
-    const searchParamsData = Object.fromEntries(searchParams.entries());
-
-    if (searchParamsData.page) setCurrentPage(+searchParamsData.page);
-
-    if (searchParamsData.search) setSearchValue(searchParamsData.search);
-  }, [searchParams]);
-
-  // filter products on searchValue change
-  React.useEffect(() => {
-    productsStore.filterProductsOnSearch(searchValue);
-  }, [productsStore, searchValue]);
-
-  // saving searchParams to Local Storage and updating existing searchParams
-  React.useEffect(() => {
-    const selectedCategoriesKeys = selectedCategories.map((category) => category.key).join('|');
-
-    localStorage.setItem('eCommerceProductsPage', currentPage.toString());
-    localStorage.setItem('eCommerceProductsSearch', searchValue);
-    localStorage.setItem('eCommerceProductsCategories', JSON.stringify(selectedCategories));
-
-    setSearchParams({ page: currentPage.toString(), search: searchValue, categories: selectedCategoriesKeys });
-  }, [currentPage, searchValue, selectedCategories, setSearchParams]);
-
-  // TODO: classnames
   return (
-    <div className={`${productsStyles.products_content} content_wrapper`}>
-      <ProductsTitle className={productsStyles.products_title} />
+    <div className={classNames(productsStyles.products_content, 'content_wrapper')}>
+      <PageTitle
+        className={productsStyles.products_title}
+        title="Products"
+        subTitle="We&nbsp;display products based on&nbsp;the latest products we&nbsp;have, if&nbsp;you want to&nbsp;see our old
+          products please enter the name of&nbsp;the item"
+      />
       <section className={productsStyles.products_search_controls}>
-        <ProductsSearchInput className={productsStyles.products_search} onSearch={setSearchValue} />
-        <ProductsMultiDropdown selectedOptions={selectedCategories} onChange={setSelectedCategories} />
+        <ProductsSearchInput
+          className={productsStyles.products_search}
+          onSearch={(value) => {
+            setSearchParams((prevParams) => ({
+              ...paramsFromEntries(prevParams),
+              search: value,
+              page: '1',
+            }));
+          }}
+        />
+        <MultiDropdown
+          id="productsFilter"
+          value={categoriesToOptions(
+            categoriesStore.findSelectedCategories(
+              paramsFromEntries(searchParams)
+                .categories.split('|')
+                .map((categoryId) => +categoryId),
+            ),
+          )}
+          onChange={(value: Option[]) => {
+            setSearchParams((prevParams) => ({
+              ...paramsFromEntries(prevParams),
+              categories: value.map((option) => option.key).join('|'),
+              page: '1',
+            }));
+          }}
+          options={categoriesToOptions(categoriesStore.categories)}
+          getTitle={(value: Option[]) => {
+            if (value.length) {
+              return value.map((option) => option.value).join(', ');
+            }
+
+            return 'Filter';
+          }}
+        />
       </section>
       <ProductsList
         className={productsStyles.products_list}
         products={productsStore.products}
-        currentPage={currentPage}
-        onPageChange={(page: number) => setCurrentPage(page)}
+        totalProductsCount={productsStore.total}
+        currentPage={+paramsFromEntries(searchParams).page}
+        onPageChange={(page: number) =>
+          setSearchParams((prevParams) => ({
+            ...paramsFromEntries(prevParams),
+            page: page.toString(),
+          }))
+        }
       />
+      {loading && (
+        <PopupWrapper>
+          <LoadingSpinner />
+        </PopupWrapper>
+      )}
     </div>
   );
 });

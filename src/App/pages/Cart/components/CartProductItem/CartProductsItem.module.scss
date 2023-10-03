@@ -1,0 +1,44 @@
+@use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
+
+.cart_item {
+  padding: $space-s;
+  background: $brand-white;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 3fr 3fr 3fr 3fr;
+  align-items: center;
+}
+
+.cart_item_thumbnail {
+  max-width: 200px;
+  max-height: 150px;
+}
+
+.cart_item_title,
+.cart_item_quantity,
+.cart_item_price {
+  justify-self: center;
+}
+
+.cart_item_title {
+  width: 100%;
+}
+
+.cart_item_quantity {
+  @include flex(row, center, flex-start, $space-xxs);
+
+  button {
+    outline: none;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    @include flex(row, center, center, 0);
+  }
+
+  button:disabled {
+    color: $text-accent;
+  }
+}

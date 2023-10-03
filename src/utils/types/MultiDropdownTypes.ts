@@ -7,6 +7,8 @@ export type Option = {
 
 /** Пропсы, которые принимает компонент Dropdown */
 export type MultiDropdownProps = {
+  id: string;
+
   className?: string;
   /** Массив возможных вариантов для выбора */
   options: Option[];

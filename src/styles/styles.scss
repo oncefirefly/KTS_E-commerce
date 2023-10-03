@@ -1,4 +1,5 @@
-@import "./Roboto/fonts";
+@use "/src/styles/variables" as *;
+@import "/src/styles/Roboto/fonts";
 
 html,
 body {
@@ -36,4 +37,11 @@ a {
 .content_wrapper {
   margin-inline: auto;
   max-width: 1240px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px $brand-white inset !important;
 }

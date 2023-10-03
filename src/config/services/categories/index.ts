@@ -1,5 +1,5 @@
-import { eCommerceInstance } from 'config/services/eCommerceInstance';
-import { ProductCategory } from 'utils/types/ProductTypes';
+import { eCommerceInstance } from '@config/services/eCommerceInstance';
+import { ProductCategory } from '@utils/types/ProductTypes';
 
 export const getCategories = (): Promise<ProductCategory[]> =>
   eCommerceInstance

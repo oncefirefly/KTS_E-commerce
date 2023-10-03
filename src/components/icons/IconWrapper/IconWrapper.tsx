@@ -1,18 +1,19 @@
 import * as React from 'react';
 
-import { IconProps } from 'utils/types/IconTypes';
+import { IconProps } from '@utils/types/IconTypes';
 
-export const IconWrapper: React.FC<React.PropsWithChildren<IconProps>> = (props) => {
+export const IconWrapper: React.FC<React.PropsWithChildren<IconProps>> = ({
+  className,
+  width,
+  height,
+  viewBox,
+  fill,
+  children,
+  ...props
+}) => {
   return (
-    <svg
-      className={props.className}
-      width={props.width || 24}
-      height={props.height || 24}
-      viewBox={props.viewBox}
-      fill={props.fill}
-      {...props}
-    >
-      {props.children}
+    <svg className={className || ''} width={width || 24} height={height || 24} viewBox={viewBox} fill={fill} {...props}>
+      {children}
     </svg>
   );
 };

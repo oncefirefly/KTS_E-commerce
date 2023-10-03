@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { IconWrapper } from 'components/icons/';
+import { IconWrapper } from '@components/icons/index';
 
 export const UserIcon: React.FC = () => {
   return (

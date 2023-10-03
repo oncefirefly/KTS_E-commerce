@@ -1,0 +1,25 @@
+@use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
+
+.login {
+  margin-top: 100px;
+  @include flex(column, center, center);
+
+  .login_title {
+    margin-bottom: 30px;
+  }
+
+  form {
+    width: 500px;
+    @include flex(column, center, center, $space-m);
+
+    .login_input_wrapper {
+      width: 100%;
+      @include flex(column, flex-start, flex-start, $space-xxs);
+    }
+
+    .login_submit {
+      width: 100%;
+    }
+  }
+}

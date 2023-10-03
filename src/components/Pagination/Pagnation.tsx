@@ -1,19 +1,19 @@
-import classnames from 'classnames';
+import classNames from 'classnames';
 import * as React from 'react';
 
-import { Text } from 'components/';
-import { ArrowLeftIcon } from 'components/icons';
+import { ArrowLeftIcon } from '@components/icons/index';
+import { Text } from '@components/index';
 
-import { usePagination, DOTS } from 'utils/hooks/usePagination';
+import { usePagination, DOTS } from '@utils/hooks/usePagination';
 
-import { PaginationProps } from 'utils/types/PaginationTypes';
+import { PaginationProps } from '@utils/types/PaginationTypes';
 
 import paginationStyles from './Pagination.module.scss';
 
 export const Pagination: React.FC<PaginationProps> = ({
   onPageChange,
   totalCount,
-  siblingCount = 1,
+  siblingCount = 2,
   currentPage,
   pageSize,
   className,
@@ -44,9 +44,9 @@ export const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <ul className={classnames(paginationStyles.pagination_container, className ? { [className]: className } : '')}>
+    <ul className={classNames(paginationStyles.pagination_container, { [`${className}`]: className })}>
       <li
-        className={classnames(paginationStyles.pagination_item, {
+        className={classNames(paginationStyles.pagination_item, {
           [paginationStyles.item_disabled]: currentPage === 1,
         })}
         onClick={onPrevious}
@@ -67,7 +67,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         return (
           <li
             key={index}
-            className={classnames(paginationStyles.pagination_item, {
+            className={classNames(paginationStyles.pagination_item, {
               [paginationStyles.item_selected]: pageNumber === currentPage,
             })}
             onClick={() => onPageChange(+pageNumber)}
@@ -79,12 +79,12 @@ export const Pagination: React.FC<PaginationProps> = ({
         );
       })}
       <li
-        className={classnames(paginationStyles.pagination_item, {
+        className={classNames(paginationStyles.pagination_item, {
           [paginationStyles.item_disabled]: currentPage === lastPage,
         })}
         onClick={onNext}
       >
-        <ArrowLeftIcon className={classnames(paginationStyles.arrow_right)} />
+        <ArrowLeftIcon className={classNames(paginationStyles.arrow_right)} />
       </li>
     </ul>
   );

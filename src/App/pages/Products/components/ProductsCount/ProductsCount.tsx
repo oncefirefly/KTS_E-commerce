@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { Text } from 'components/';
+import { Text } from '@components/index';
 
-import { ProductsCountProps } from 'utils/types/ProductTypes';
+import { ProductsCountProps } from '@utils/types/ProductTypes';
 
 export const ProductsCount: React.FC<ProductsCountProps> = ({ className, count = 0 }) => {
   return (

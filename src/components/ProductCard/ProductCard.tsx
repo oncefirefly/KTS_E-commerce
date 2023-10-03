@@ -1,8 +1,9 @@
+import classNames from 'classnames';
 import * as React from 'react';
 
-import { Text } from 'components/';
+import { Text } from '@components/index';
 
-import { ProductCardProps } from 'utils/types/ProductTypes';
+import { ProductCardProps } from '@utils/types/ProductTypes';
 
 import cardStyles from './ProductCard.module.scss';
 
@@ -13,12 +14,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   title,
   subtitle,
   contentSlot,
-  onClick,
   actionSlot,
+  onClick,
   ...props
 }: ProductCardProps) => {
   return (
-    <div className={`${cardStyles.card_container} ${className ? ` ${className}` : ''}`} onClick={onClick} {...props}>
+    <div
+      className={classNames(cardStyles.card_container, { [`${className}`]: className })}
+      onClick={onClick}
+      {...props}
+    >
       <div className={cardStyles.card_header}>
         <img src={image} alt="card_thumbnail" />
       </div>
@@ -32,9 +37,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <Text view="p-20" maxLines={1} weight="bold" color="primary" data-testid="text">
             {title}
           </Text>
-          <Text view="p-16" maxLines={1} color="secondary" data-testid="text">
-            {subtitle}
-          </Text>
+          {subtitle && (
+            <Text view="p-16" maxLines={1} color="secondary" data-testid="text">
+              {subtitle}
+            </Text>
+          )}
         </div>
         <div className={cardStyles.card_footer}>
           {contentSlot && (

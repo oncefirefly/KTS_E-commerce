@@ -1,44 +1,38 @@
 import { action, computed, makeObservable, observable, runInAction } from 'mobx';
-import { getProducts } from 'config/services/products';
+import { getProducts } from '@config/services/products';
 
-import { OneProduct } from 'utils/types/ProductTypes';
+import { OneProduct } from '@utils/types/ProductTypes';
 
-type PrivateProductsStoreFields = '_products' | '_filteredProducts';
+type PrivateProductsStoreFields = '_products' | '_totalProductsCount';
 
 export default class ProductsStore {
+  private _totalProductsCount: number = 0;
   private _products: OneProduct[] = [];
-  private _filteredProducts: OneProduct[] = [];
 
   constructor() {
     makeObservable<ProductsStore, PrivateProductsStoreFields>(this, {
+      _totalProductsCount: observable,
       _products: observable,
-      _filteredProducts: observable,
       fetchProducts: action.bound,
-      filterProductsOnSearch: action,
       products: computed,
+      total: computed,
     });
   }
 
   get products() {
-    return this._filteredProducts;
+    return this._products;
   }
 
-  async fetchProducts(categoryIds?: string) {
-    const productsData = await getProducts(categoryIds || '');
-
-    runInAction(() => {
-      this._products = productsData;
-      this._filteredProducts = productsData;
-    });
+  get total() {
+    return this._totalProductsCount;
   }
 
-  filterProductsOnSearch(value: string) {
-    const lowerCaseValue = value.toLocaleLowerCase();
+  async fetchProducts({ categoryIds = '', searchValue = '', offset = 0, limit = Infinity }) {
+    const productsData = await getProducts({ categoryIds, searchValue, offset, limit });
 
     runInAction(() => {
-      this._filteredProducts = this._products.filter((product) =>
-        product.title.toLocaleLowerCase().includes(lowerCaseValue),
-      );
+      this._totalProductsCount = productsData.total;
+      this._products = productsData.products;
     });
   }
 }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { usePaginationHookProps } from 'utils/types/PaginationTypes';
+import { usePaginationHookProps } from '@utils/types/PaginationTypes';
 
 export const DOTS = '...';
 

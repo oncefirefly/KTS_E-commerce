@@ -1,0 +1,17 @@
+@use "/src/styles/variables" as *;
+@use "/src/styles/mixins" as *;
+
+.cart {
+  margin-top: 50px;
+  padding-bottom: 200px;
+  margin-bottom: 200px;
+  @include flex(column, stretch, flex-start, $space-xl);
+}
+
+.cart_title {
+  @include flex(row, center, space-between, 0);
+}
+
+.cart_total {
+  @include flex(row, center, flex-start, $space-xxs);
+}

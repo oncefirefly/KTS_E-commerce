@@ -1,39 +1,88 @@
+import classNames from 'classnames';
+
+import { observer } from 'mobx-react-lite';
 import * as React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { Link, useParams } from 'react-router-dom';
+import { ArrowLeftIcon } from '@components/icons/index';
+import { Button, Text, ProductCard } from '@components/index';
 
-import { Button, ProductCard, Text } from 'components/';
-import { ArrowLeftIcon } from 'components/icons/';
+import { getProductById } from '@config/services/products';
 
-import { getProductById } from 'config/services/products';
+import ProductsStore from '@store/ProductsStore';
+import { categoriesStore, cartStore } from '@store/instance';
 
-import { OneProduct } from 'utils/types/ProductTypes';
+import { OneProduct } from '@utils/types/ProductTypes';
 
 import productStyles from './Product.module.scss';
 
-export const Product: React.FC = () => {
+export const Product: React.FC = observer(() => {
   const { productId } = useParams();
+
+  const navigate = useNavigate();
+
+  const [cartButtonProperties, setCartButtonProperties] = React.useState<{
+    text: string;
+    color: 'secondary' | 'primary';
+  } | null>(null);
+
+  const categoriesLength = categoriesStore.categories.length;
+  const productsStore = React.useMemo(() => {
+    return new ProductsStore();
+  }, []);
 
   const [product, setProduct] = React.useState<OneProduct | null>(null);
 
-  const fetchProductById = async (id: string) => {
-    const fetchedProduct = await getProductById(id);
-
-    setProduct(fetchedProduct);
+  const handleProductClick = (productId: number) => {
+    navigate(`/product/${productId}`);
   };
 
-  React.useEffect(() => {
+  React.useMemo(() => {
+    const fetchProductById = async (id: string) => {
+      const fetchedProduct = await getProductById(id);
+
+      setProduct(fetchedProduct);
+
+      if (!categoriesLength) {
+        await categoriesStore.fetchCategories();
+      }
+
+      const categoryId = categoriesStore.findCategoryIdByName(fetchedProduct.category);
+
+      await productsStore.fetchProducts({
+        categoryIds: categoryId.toString(),
+        offset: Math.floor(Math.random() * 5),
+        limit: 3,
+      });
+    };
+
     if (productId) fetchProductById(productId);
-  }, [productId]);
+  }, [categoriesLength, productId, productsStore]);
+
+  React.useMemo(() => {
+    if (product && Object.keys(product).length) {
+      setCartButtonProperties(
+        cartStore.isInCart(product)
+          ? {
+              text: 'Remove from Cart',
+              color: 'secondary' as 'primary' | 'secondary',
+            }
+          : {
+              text: 'Add to Cart',
+              color: 'primary' as 'primary' | 'secondary',
+            },
+      );
+    }
+  }, [product]);
 
   return (
-    <div className={`${productStyles.product_content} content_wrapper`}>
-      <Link to={'..'} className={productStyles.product_back}>
+    <div className={classNames(productStyles.product_content, 'content_wrapper')}>
+      <button onClick={() => navigate(-1)} className={productStyles.product_back}>
         <ArrowLeftIcon color="primary" />
         <Text view="p-20" color="primary">
           Назад
         </Text>
-      </Link>
+      </button>
       {product && Object.keys(product).length && (
         <section className={productStyles.product_details}>
           <img src={product.images[0]} alt="product" />
@@ -48,14 +97,31 @@ export const Product: React.FC = () => {
             </div>
             <div className={productStyles.product_secondary}>
               <Text view="title">${product.price}</Text>
-              <div className={productStyles.product_controls}>
-                <Button>
-                  <Text view="button">Buy now</Text>
-                </Button>
-                <Button color="secondary">
-                  <Text view="button">Add to Cart</Text>
-                </Button>
-              </div>
+              {cartButtonProperties && Object.keys(cartButtonProperties).length && (
+                <div className={productStyles.product_controls}>
+                  <Button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (cartStore.isInCart(product)) {
+                        cartStore.removeFromCart(product);
+                        setCartButtonProperties({
+                          text: 'Add to Cart',
+                          color: 'primary',
+                        });
+                        return;
+                      }
+                      cartStore.addToCart(product);
+                      setCartButtonProperties({
+                        text: 'Remove  from Cart',
+                        color: 'secondary',
+                      });
+                    }}
+                    color={cartButtonProperties.color}
+                  >
+                    <Text view="button">{cartButtonProperties.text}</Text>
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -64,14 +130,20 @@ export const Product: React.FC = () => {
         <Text tag="h3" view="subtitle">
           Related Items
         </Text>
-        <ProductCard
-          image="https://www.ikea.com/sg/en/images/products/kivik-3-seat-sofa-grann-bomstad-black__0137863_pe296632_s5.jpg?f=s"
-          title="KIVIK"
-          subtitle="Cuddle up in the comfortable KIVIK sofa. The generous size, low armrests and pocket springs with foam that adapts to the body invites you and your guests to many hours of socialising and relaxation."
-          contentSlot="123"
-          actionSlot={<Button>Add to Cart</Button>}
-        />
+        <div className={productStyles.product_related_list}>
+          {productsStore.products.map(({ id, images, category, title, description, price }) => (
+            <ProductCard
+              key={id}
+              image={images[0]}
+              captionSlot={category}
+              title={title}
+              subtitle={description}
+              contentSlot={price}
+              onClick={() => handleProductClick(id)}
+            />
+          ))}
+        </div>
       </section>
     </div>
   );
-};
+});
