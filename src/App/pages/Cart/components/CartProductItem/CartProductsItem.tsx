@@ -22,7 +22,9 @@ export const CartProductsItem: React.FC<CartItemProps> = observer(({ product }) 
         </Text>
       </div>
       <div className={cartItemStyles.cart_item_quantity}>
-        <button onClick={() => cartStore.substractQuantity(product)}>-</button>
+        <button onClick={() => cartStore.substractQuantity(product)} disabled={product.quantity === 0}>
+          -
+        </button>
         <Text>{product.quantity}</Text>
         <button onClick={() => cartStore.addQuantity(product)}>+</button>
       </div>

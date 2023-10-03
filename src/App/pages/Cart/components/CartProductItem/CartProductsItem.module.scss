@@ -37,4 +37,8 @@
     border: none;
     @include flex(row, center, center, 0);
   }
+
+  button:disabled {
+    color: $text-accent;
+  }
 }

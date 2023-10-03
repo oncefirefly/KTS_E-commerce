@@ -6,7 +6,7 @@ import { LoadingSpinner, PageTitle, PopupWrapper } from '@components/index';
 
 import { categoriesStore } from '@store/instance';
 
-import { CategoriesList } from './components/CategoriesList/CategoriesList';
+import { CategoriesList } from './components/';
 
 import categoriesStyles from './Categories.module.scss';
 

@@ -1,50 +1,24 @@
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
 
-import { Button, ProductCard, Pagination, Text } from '@components/index';
-
-import { cartStore } from '@store/instance';
+import { Pagination } from '@components/index';
 
 import { pageSize } from '@utils/constants/pageSize';
 import { ProductsListProps } from '@utils/types/ProductTypes';
 
 import { ProductsCount } from '../';
+import { ProductPageCard } from './components';
 
 import productsListStyles from './ProductsList.module.scss';
 
 export const ProductsList: React.FC<ProductsListProps> = observer(
   ({ className, products, totalProductsCount, currentPage, onPageChange }) => {
-    const navigate = useNavigate();
-
-    const handleProductClick = (productId: number) => {
-      navigate(`/product/${productId}`);
-    };
-
     return (
       <section className={className || ''}>
         <ProductsCount className={productsListStyles.products_count} count={totalProductsCount} />
         <div className={productsListStyles.products_list_container}>
-          {products.map(({ id, images, category, title, subtitle, description, price }) => (
-            <ProductCard
-              key={id}
-              image={images[0]}
-              captionSlot={category}
-              title={title}
-              subtitle={description}
-              contentSlot={price}
-              actionSlot={
-                <Button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    cartStore.addToCart({ id, images, category, subtitle, title, description, price });
-                  }}
-                >
-                  <Text view="p-18">Add to Cart</Text>
-                </Button>
-              }
-              onClick={() => handleProductClick(id)}
-            />
+          {products.map((product) => (
+            <ProductPageCard key={product.id} product={product} />
           ))}
         </div>
         <Pagination

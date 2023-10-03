@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route, HashRouter } from 'react-router-dom';
 
 import { Header } from '@components/index';
 
@@ -7,7 +7,7 @@ import { Cart, Categories, Login, Product, Products } from './pages/';
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Header />
       <main>
         <Routes>
@@ -18,7 +18,7 @@ const App: React.FC = () => {
           <Route path="/login" element={<Login />} />
         </Routes>
       </main>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 

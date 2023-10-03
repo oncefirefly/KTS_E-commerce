@@ -7,8 +7,6 @@ import { ProductCardProps } from '@utils/types/ProductTypes';
 
 import cardStyles from './ProductCard.module.scss';
 
-// `${cardStyles.card_container} ${className ? ` ${className}` : ''}`
-
 export const ProductCard: React.FC<ProductCardProps> = ({
   className,
   image,

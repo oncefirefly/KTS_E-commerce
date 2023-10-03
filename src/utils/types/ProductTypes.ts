@@ -39,6 +39,10 @@ export type ProductCardProps = {
   onClick?: React.MouseEventHandler;
 };
 
+export type ProductPageCardProps = {
+  product: OneProduct;
+};
+
 export type OneProduct = {
   id: number;
   price: number;

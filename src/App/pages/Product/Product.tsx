@@ -21,6 +21,11 @@ export const Product: React.FC = observer(() => {
 
   const navigate = useNavigate();
 
+  const [cartButtonProperties, setCartButtonProperties] = React.useState<{
+    text: string;
+    color: 'secondary' | 'primary';
+  } | null>(null);
+
   const categoriesLength = categoriesStore.categories.length;
   const productsStore = React.useMemo(() => {
     return new ProductsStore();
@@ -54,6 +59,22 @@ export const Product: React.FC = observer(() => {
     if (productId) fetchProductById(productId);
   }, [categoriesLength, productId, productsStore]);
 
+  React.useMemo(() => {
+    if (product && Object.keys(product).length) {
+      setCartButtonProperties(
+        cartStore.isInCart(product)
+          ? {
+              text: 'Remove from Cart',
+              color: 'secondary' as 'primary' | 'secondary',
+            }
+          : {
+              text: 'Add to Cart',
+              color: 'primary' as 'primary' | 'secondary',
+            },
+      );
+    }
+  }, [product]);
+
   return (
     <div className={classNames(productStyles.product_content, 'content_wrapper')}>
       <button onClick={() => navigate(-1)} className={productStyles.product_back}>
@@ -76,17 +97,31 @@ export const Product: React.FC = observer(() => {
             </div>
             <div className={productStyles.product_secondary}>
               <Text view="title">${product.price}</Text>
-              <div className={productStyles.product_controls}>
-                <Button
-                  color="secondary"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    cartStore.addToCart(product);
-                  }}
-                >
-                  <Text view="button">Add to Cart</Text>
-                </Button>
-              </div>
+              {cartButtonProperties && Object.keys(cartButtonProperties).length && (
+                <div className={productStyles.product_controls}>
+                  <Button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (cartStore.isInCart(product)) {
+                        cartStore.removeFromCart(product);
+                        setCartButtonProperties({
+                          text: 'Add to Cart',
+                          color: 'primary',
+                        });
+                        return;
+                      }
+                      cartStore.addToCart(product);
+                      setCartButtonProperties({
+                        text: 'Remove  from Cart',
+                        color: 'secondary',
+                      });
+                    }}
+                    color={cartButtonProperties.color}
+                  >
+                    <Text view="button">{cartButtonProperties.text}</Text>
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </section>
