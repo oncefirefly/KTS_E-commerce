@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "commonjs",
-  "homepage": "https://oncefirefly.github.io/KTS_E-commerce",
+  "homepage": "https://oncefirefly.github.io/KTS_E-commerce/",
   "scripts": {
     "dev": "cross-env NODE_ENV=development npx webpack serve --mode=development",
     "build": "SET NODE_ENV=production & npx webpack --mode=production",
