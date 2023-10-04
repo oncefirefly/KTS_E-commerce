@@ -2,6 +2,7 @@
 @use "/src/styles/mixins" as *;
 
 .cart_item {
+  cursor: pointer;
   padding: $space-s;
   background: $brand-white;
   width: 100%;
