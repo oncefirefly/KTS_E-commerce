@@ -24,7 +24,7 @@ export const Header: React.FC = observer(() => {
               <Text>{userDataStore.userData.displayName || userDataStore.userData.email}</Text>
             )}
             <Link to="/cart" className={headerStyles.header_cart}>
-              <div className={headerStyles.header_cart_count}>{cartStore.cartCount}</div>
+              {cartStore.cartCount > 0 && <div className={headerStyles.header_cart_count}>{cartStore.cartCount}</div>}
               <CartIcon />
             </Link>
             {userDataStore.userData.uid === 'guest' ? (

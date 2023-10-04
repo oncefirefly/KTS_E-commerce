@@ -41,6 +41,8 @@
     background: red;
     color: $brand-white;
     border-radius: 50%;
+    font-size: 16px;
+    font-weight: 500;
 
     @include flex(row, center, center, 0);
   }
