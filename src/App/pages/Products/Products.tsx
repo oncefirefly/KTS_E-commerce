@@ -82,8 +82,8 @@ export const Products: React.FC = observer(() => {
           value={categoriesToOptions(
             categoriesStore.findSelectedCategories(
               paramsFromEntries(searchParams)
-                .categories.split('|')
-                .map((categoryId) => +categoryId),
+                .categories?.split('|')
+                .map((categoryId: string | number) => +categoryId),
             ),
           )}
           onChange={(value: Option[]) => {

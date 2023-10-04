@@ -37,15 +37,17 @@ export default class CategoriesStore {
     return this._categories.find((category) => category.name === categoryName)?.id || 0;
   }
 
-  findSelectedCategories(selectedIds: number[]) {
-    return selectedIds.reduce((selectedOptions, selectedId) => {
-      const foundCategory = this.categories.find((category) => category.id === +selectedId);
+  findSelectedCategories(selectedIds: number[] | undefined) {
+    return selectedIds
+      ? selectedIds.reduce((selectedOptions, selectedId) => {
+          const foundCategory = this.categories.find((category) => category.id === +selectedId);
 
-      if (foundCategory) {
-        selectedOptions.push(foundCategory);
-      }
+          if (foundCategory) {
+            selectedOptions.push(foundCategory);
+          }
 
-      return selectedOptions;
-    }, [] as ProductCategory[]);
+          return selectedOptions;
+        }, [] as ProductCategory[])
+      : [];
   }
 }
