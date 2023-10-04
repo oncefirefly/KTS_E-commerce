@@ -28,3 +28,20 @@
   width: fit-content;
   height: fit-content;
 }
+
+.header_cart {
+  position: relative;
+
+  .header_cart_count {
+    top: -10px;
+    right: -10px;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    background: red;
+    color: $brand-white;
+    border-radius: 50%;
+
+    @include flex(row, center, center, 0);
+  }
+}

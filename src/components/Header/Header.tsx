@@ -8,7 +8,7 @@ import { NavBar, Text } from '@components/index';
 
 import { headerRoutes } from '@config/routes/routes';
 
-import { userDataStore } from '@store/instance';
+import { userDataStore, cartStore } from '@store/instance';
 
 import headerStyles from './Header.module.scss';
 
@@ -23,7 +23,8 @@ export const Header: React.FC = observer(() => {
             {userDataStore.userData.uid !== 'guest' && (
               <Text>{userDataStore.userData.displayName || userDataStore.userData.email}</Text>
             )}
-            <Link to="/cart">
+            <Link to="/cart" className={headerStyles.header_cart}>
+              <div className={headerStyles.header_cart_count}>{cartStore.cartCount}</div>
               <CartIcon />
             </Link>
             {userDataStore.userData.uid === 'guest' ? (

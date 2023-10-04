@@ -24,6 +24,7 @@ export default class CartStore {
       _cart: observable,
       cart: computed,
       totalPrice: computed,
+      cartCount: computed,
       isInCart: action.bound,
       addToCart: action.bound,
       removeFromCart: action.bound,
@@ -38,6 +39,10 @@ export default class CartStore {
 
   get totalPrice() {
     return this._cart.products.reduce((total, product) => (total += product.price * product.quantity), 0);
+  }
+
+  get cartCount() {
+    return this._cart.products.length;
   }
 
   private updateCartUID(uid: string) {
