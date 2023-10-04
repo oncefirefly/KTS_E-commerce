@@ -27,6 +27,26 @@ export const ProductPageCard: React.FC<ProductPageCardProps> = observer(({ produ
     navigate(`/product/${productId}`);
   };
 
+  const handleActionSlotClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    if (cartStore.isInCart(product)) {
+      cartStore.removeFromCart(product);
+      setActionSlotProperties({
+        text: 'Add to Cart',
+        color: 'primary',
+      });
+
+      return;
+    }
+
+    cartStore.addToCart(product);
+    setActionSlotProperties({
+      text: 'Remove  from Cart',
+      color: 'secondary',
+    });
+  };
+
   return (
     <ProductCard
       key={product.id}
@@ -36,28 +56,7 @@ export const ProductPageCard: React.FC<ProductPageCardProps> = observer(({ produ
       subtitle={product.description}
       contentSlot={product.price}
       actionSlot={
-        <Button
-          onClick={(e) => {
-            e.stopPropagation();
-
-            if (cartStore.isInCart(product)) {
-              cartStore.removeFromCart(product);
-              setActionSlotProperties({
-                text: 'Add to Cart',
-                color: 'primary',
-              });
-
-              return;
-            }
-
-            cartStore.addToCart(product);
-            setActionSlotProperties({
-              text: 'Remove  from Cart',
-              color: 'secondary',
-            });
-          }}
-          color={actionSlotProperties.color}
-        >
+        <Button onClick={(e) => handleActionSlotClick(e)} color={actionSlotProperties.color}>
           <Text view="p-18">{actionSlotProperties.text}</Text>
         </Button>
       }
